@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Job Application Form</title>
+</head>
+<!---You should have a div element with the class container.
+Inside the div element, you should have a form element.
+The form should contain an input element with the type text and the id name for entering the user's full name.
+You should have another input element with the type email and the id email for entering the user's email address.
+The form should include a select element with the id position that allows users to select a job position.
+You should have a fieldset element with class of radio-group.
+Inside .radio-group you should have a set of input elements with the type radio and relevant labels for selecting availability options (e.g., Full-Time, Part-Time). The group name should be availability.
+You should have a textarea element with the id message for entering a message.
+You should associate every input element with a label element.
+You should have a button element with the type submit for submitting the form.
+Add a :focus pseudo-class to the input and textarea elements to change their border color when focused.
+The input, select and textarea elements should have an :invalid pseudo-class that changes the border color to red when invalid input is detected.
+The input, select and textarea elements should have a :valid pseudo-class that changes the border color to green when valid input is entered.
+The button element should have a :hover pseudo-class that changes the background color when hovered over.
+Use the :checked pseudo-class on .radio-group input[type="radio"] to add a border color, background color and a box shadow when the radio button is selected.
+Use the :checked pseudo-class on radio buttons to change the text color of the associated label when the option is selected.
+Add a :first-of-type pseudo-class to the input element to style the first input field differently. (e.g., rounded corners).-->
+<body>
+    <div class="container">
+        <form action="#" method="post">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+
+            <label for="position">Job Position:</label>
+            <select id="position" name="position" required>
+                <option value="" disabled selected>Select a position</option>
+                <option value="developer">Developer</option>
+                <option value="designer">Designer</option>
+                <option value="manager">Manager</option>
+            </select>
+
+            <fieldset class="radio-group">
+                <legend>Availability:</legend>
+                <input type="radio" id="full-time" name="availability" value="full-time" required>
+                <label for="full-time">Full-Time</label>
+
+                <input type="radio" id="part-time" name="availability" value="part-time">
+                <label for="part-time">Part-Time</label>
+
+                <input type="radio" id="freelance" name="availability" value="freelance">
+                <label for="freelance">Freelance</label>
+            </fieldset>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" placeholder="Enter your message here"></textarea>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </div>
+</body>
+</html>
+<!-- This is the css: 
+ */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #007bff;
+}
+
+input:invalid,
+select:invalid,
+textarea:invalid {
+    border-color: red;
+}
+
+input:valid,
+select:valid,
+textarea:valid {
+    border-color: green;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.radio-group {
+    margin-bottom: 10px;
+}
+
+.radio-group input[type="radio"]:checked + label {
+    color: #007bff;
+}
+
+.radio-group input[type="radio"]:checked {
+    border-color: #007bff;
+    background-color: #e7f0ff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input:first-of-type {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+input:last-of-type {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+-->
+<!-- this is the js: -->
+<script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Form submitted!");
+    });
+</script>

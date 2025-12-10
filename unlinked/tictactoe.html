@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tic Tac Toe 5x5</h1>
+        <div class="game-controls">
+            <div class="game-mode">
+                <button id="pvp-button" class="mode-button active">Player vs Player</button>
+                <button id="pvc-button" class="mode-button">Player vs CPU</button>
+            </div>
+            <div class="cpu-difficulty" id="cpu-difficulty" style="display: none;">
+                <label>CPU Difficulty:</label>
+                <select id="difficulty-select">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <button id="shift-row-button" class="shift-button">Shift Row →</button>
+            <button id="restart-button" class="restart-button">Restart Game</button>
+            <div class="shift-instructions">Click a row number, then shift!</div>
+        </div>
+        <div id="game-board" class="game-board">
+            <div class="row-label">1</div>
+            <div class="cell" data-cell-index="0" data-row="0" data-col="0"></div>
+            <div class="cell" data-cell-index="1" data-row="0" data-col="1"></div>
+            <div class="cell" data-cell-index="2" data-row="0" data-col="2"></div>
+            <div class="cell" data-cell-index="3" data-row="0" data-col="3"></div>
+            <div class="cell" data-cell-index="4" data-row="0" data-col="4"></div>
+            
+            <div class="row-label">2</div>
+            <div class="cell" data-cell-index="5" data-row="1" data-col="0"></div>
+            <div class="cell" data-cell-index="6" data-row="1" data-col="1"></div>
+            <div class="cell" data-cell-index="7" data-row="1" data-col="2"></div>
+            <div class="cell" data-cell-index="8" data-row="1" data-col="3"></div>
+            <div class="cell" data-cell-index="9" data-row="1" data-col="4"></div>
+            
+            <div class="row-label">3</div>
+            <div class="cell" data-cell-index="10" data-row="2" data-col="0"></div>
+            <div class="cell" data-cell-index="11" data-row="2" data-col="1"></div>
+            <div class="cell" data-cell-index="12" data-row="2" data-col="2"></div>
+            <div class="cell" data-cell-index="13" data-row="2" data-col="3"></div>
+            <div class="cell" data-cell-index="14" data-row="2" data-col="4"></div>
+            
+            <div class="row-label">4</div>
+            <div class="cell" data-cell-index="15" data-row="3" data-col="0"></div>
+            <div class="cell" data-cell-index="16" data-row="3" data-col="1"></div>
+            <div class="cell" data-cell-index="17" data-row="3" data-col="2"></div>
+            <div class="cell" data-cell-index="18" data-row="3" data-col="3"></div>
+            <div class="cell" data-cell-index="19" data-row="3" data-col="4"></div>
+            
+            <div class="row-label">5</div>
+            <div class="cell" data-cell-index="20" data-row="4" data-col="0"></div>
+            <div class="cell" data-cell-index="21" data-row="4" data-col="1"></div>
+            <div class="cell" data-cell-index="22" data-row="4" data-col="2"></div>
+            <div class="cell" data-cell-index="23" data-row="4" data-col="3"></div>
+            <div class="cell" data-cell-index="24" data-row="4" data-col="4"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

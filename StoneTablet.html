@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ashwalker Tablet – Restricted Lore</title>
+  <link rel="stylesheet" href="StoneTablet.css">
+</head>
+<body>
+
+  <h1>The Ashwalker Tablet</h1>
+  
+  <div class="artifact-info">
+    <p><strong>Where it came from:</strong> Falosmount<br>
+       <strong>Where it's going:</strong> Nobody's saying, but the cart's heading east<br>
+       <strong>What it looks like:</strong> Big stone slab with dark veins running through it. Gets warm around fire. Old as dirt, maybe older.</p>
+  </div>
+
+  <h2>🗣️ What People Are Saying</h2>
+  <ul>
+    <li>Museum folks hired a whole crew to pull this thing out of Falosmount. Took forever and cost a fortune.</li>
+    <li>Thing's made of stone but it's always warm. Weird warm, like it's got a fever or something.</li>
+    <li>Two guards walked off the job. One guy said it was messing with his sleep. The other just went quiet and left.</li>
+    <li>They're taking back roads, avoiding the main towns. Word is it's either cursed or holy, maybe both.</li>
+    <li>Everyone's calling it the Ashwalker Tablet. Nobody knows what that means or why it matters now.</li>
+    <li>There's this big woman following the convoy. Goliath type. Keeps her distance but she's definitely watching. Looks mad about something.</li>
+  </ul>
+
+  <h2>Locked Information</h2>
+  
+  <div class="passcode-section">
+    <p><em>Someone's keeping secrets. You need the right word to see what's really going on.</em></p>
+    
+    <label for="passcode">What's the tablet's real name?</label><br>
+    <input type="text" id="passcode" placeholder="Enter the name" maxlength="20">
+    <button onclick="checkPasscode()">Try It</button>
+    <div id="attempts"></div>
+  </div>
+
+  <div id="restricted" class="locked-lore hidden">
+    <h2>What Daisy Mae Knows</h2>
+    <p><em>"I wasn't around when they dug it up, but I felt it happen. Something old woke up. Like the whole mountain took a breath."</em></p>
+
+    <ul>
+      <li><strong>Its Real Name:</strong> She calls it <strong>Heartbrand</strong>. Says it's an old fire giant word that means something like "promise you carry" or "burden that burns." "It's not just what we call it. It's what it is."</li>
+      <li><strong>Family Business:</strong> Daisy's people were supposed to watch over it, not use it. But the blood connection is still there. When it's close, she dreams weird dreams. Fire and ash and voices. She thinks they're warnings.</li>
+      <li><strong>Not a Treasure:</strong> Falosmount wasn't some archaeological dig. It was more like a vault. Or a prison. The tablet was put there on purpose, with ceremonies and everything. Not just buried and forgotten.</li>
+      <li><strong>Picky About People:</strong> She says the tablet's not cursed, it's choosy. Burns people it doesn't like. Those guards who quit? One of them had it coming. The other one was probably fine, just smart enough to leave.</li>
+      <li><strong>There Are Others:</strong> This isn't the only one. She's heard stories about similar tablets. One's lost in some salt marsh, another's locked up in a chapel somewhere. Each one belongs to a different clan. Each one's still watching.</li>
+      <li><strong>Something's Listening:</strong> "People think it's just old history sitting in a box. But you don't move something like that without waking things up." The heat isn't just from the stone. Something's paying attention now.</li>
+    </ul>
+
+    <p><em>"You help me get it back where it belongs, and you'll have done more than just help me. You'll be on the right side when whatever's stirring decides to show up."</em></p>
+  </div>
+
+  <script>
+    let attempts = 0;
+    const maxAttempts = 3;
+
+    function checkPasscode() {
+      const input = document.getElementById('passcode').value.trim();
+      const attemptsDisplay = document.getElementById('attempts');
+      const correctCode = "Heartbrand";
+
+      // Show attempts display
+      attemptsDisplay.classList.remove('hidden');
+
+      if (input === correctCode) {
+        document.getElementById('restricted').classList.remove('hidden');
+        attemptsDisplay.style.display = 'none';
+        
+        // Add success feedback
+        const successMsg = document.createElement('div');
+        successMsg.textContent = "Got it! Here's what she knows...";
+        successMsg.style.cssText = `
+          color: var(--ancient-gold);
+          font-weight: bold;
+          text-align: center;
+          margin-top: 1rem;
+          animation: revealglow 1s ease-in-out;
+        `;
+        document.querySelector('.passcode-section').appendChild(successMsg);
+        
+        // Disable input
+        document.getElementById('passcode').disabled = true;
+        document.querySelector('button').disabled = true;
+        
+      } else {
+        attempts++;
+        if (attempts >= maxAttempts) {
+          attemptsDisplay.textContent = "Nope, that's not it. Try asking around more.";
+          document.getElementById('passcode').disabled = true;
+          document.querySelector('button').disabled = true;
+        } else {
+          const remaining = maxAttempts - attempts;
+          attemptsDisplay.textContent = `Not quite. You can try ${remaining} more time${remaining === 1 ? '' : 's'}.`;
+        }
+      }
+    }
+
+    // Add Enter key support
+    document.getElementById('passcode').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        checkPasscode();
+      }
+    });
+  </script>
+
+</body>
+</html>

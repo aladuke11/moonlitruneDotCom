@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Simple</title>
+    <style>
+        body {
+            background: #2d3748;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .test-box {
+            background: #4a5568;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .test-box:hover {
+            background: #ffd700;
+            color: black;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Test Page</h1>
+    <div class="test-box">Hover over me!</div>
+    <div class="test-box">And me too!</div>
+    
+    <script>
+        console.log("JavaScript is working!");
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded successfully");
+        });
+    </script>
+</body>
+</html>

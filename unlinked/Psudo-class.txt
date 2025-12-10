@@ -1,0 +1,235 @@
+Functional pseudo-classes allow you to select elements based on more complex conditions or relationships. Unlike regular pseudo-classes which target elements based on a state, for example, :hover, :focus, functional pseudo-classes accept arguments within parentheses, hence the name "functional pseudo-classes".
+
+Examples of functional pseudo-classes are:
+
+:is()
+:where()
+:has()
+:not()
+Let's take a deeper look at each of these functional pseudo-classes with examples.
+
+The :is() pseudo-class is useful when you want to style a group of elements that share some, but not all, characteristics. For example, you might want to style different types of buttons on your website, including button elements, links styled as buttons, and input elements with types submit and reset. Here's an HTML example representing that:
+
+<button>Click Me</button>
+<a href="#" class="button">Click Me Too</a>
+<input type="submit" value="Submit" />
+<input type="reset" value="Reset" />
+Without the :is() function, you would have to write a complex selector like this:
+
+button,
+a.button,
+input[type='submit'],
+input[type='reset'] {
+  background-color: darkblue;
+  color: white;
+  border: 1px solid darkblue;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+button:hover,
+a.button:hover,
+input[type='submit']:hover,
+input[type='reset']:hover {
+  background-color: lightblue;
+  border-color: lightblue;
+}
+With the :is() function, you can write a more compact and understandable selector like this:
+
+:is(button, a.button, input[type='submit'], input[type='reset']) {
+  background-color: darkblue;
+  color: white;
+  border: 1px solid darkblue;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+:is(button, a.button, input[type='submit'], input[type='reset']):hover {
+  background-color: blue;
+  border-color: blue;
+}
+The :where() pseudo-class functions similarly to :is(), but it doesn't increase the specificity of your selectors. This makes it ideal for applying styles without affecting the specificity of other rules.
+
+For example, you can use the :where() function to apply zero margin and padding to heading elements. This ensures that the reset won't interfere with more specific styles you might apply later. Here's the HTML for that:
+
+<h1>Page Title</h1>
+<h2>Subtitle</h2>
+<h3>A point</h3>
+And this is the CSS:
+
+:where(h1, h2, h3) {
+  margin: 0;
+  padding: 0;
+}
+Styling a parent element based on its children's states was previously challenging until the :has() pseudo-class was introduced. It allows you to apply styles to a parent element based on the presence or state of its child elements.
+
+For example, the CSS below will only apply to any article element that has an h2 in it:
+
+article:has(h2) {
+  border: 2px solid hotpink;
+}
+Here's the HTML for that:
+
+<article>
+  <h2>Subheading</h2>
+  <p>Lorem ipsum dolor sit amet.</p>
+</article>
+
+<article>
+  <h3>A point</h3>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p>Lorem ipsum dolor sit amet.</p>
+</article>
+The :not() pseudo-class is ideal for situations where you want to apply styles to a group of elements, excluding one or more specific exceptions. In the CSS below, any button that is not a primary button will have a grey background:
+
+button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  color: white;
+}
+
+button.primary {
+  background-color: deepskyblue;
+}
+
+button:not(.primary) {
+  background-color: grey;
+}
+Here's the HTML for the buttons:
+
+<button class="primary">Primary Button</button>
+<button class="secondary">Secondary Button</button>
+<button class="danger">Another Secondary Button</button>
+
+
+
+
+One of the most interesting aspects of CSS is the use of pseudo-elements. In this context, "pseudo" means "not real", so pseudo-elements are virtual or synthetic elements that don't directly match any actual HTML elements. They allow you to style specific parts of an element or insert content without adding extra HTML.
+
+To apply a pseudo-element, attach it to the original element's selector using a double colon (::). Note that the selector can be any type, such as a class or ID selector. Here's what the basic syntax of pseudo-elements looks like:
+
+selector::pseudo-element {
+  property: value;
+}
+This double colon is what distinguishes pseudo-elements from pseudo-classes, which use a single colon.
+
+Pseudo-elements allow you to style specific parts of an element's content or insert content before or after it, but they cannot exist independently. The element to which a pseudo-element is attached is called its originating element.
+
+Let's start by looking at examples for the ::before and ::after pseudo-elements. As their names suggest, ::before lets you insert content just before the element's content while ::after lets you insert content after it.
+
+Here is an example of a button element:
+
+<button class="cta-button">Learn More</button>
+In the CSS, we will use absolute positioning and the ::before pseudo-element to add a star before the button's Learn More text. You will learn more about absolute positioning in future lessons.
+
+.cta-button {
+  background-color: lightseagreen;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cta-button::before {
+  content: "⭐";
+  position: absolute;
+  left: 3px;
+  top: 8px;
+  font-size: 0.75rem;
+}
+The content property is used to represent the content you wish to add before the button text. In this example, we are adding a star. You'll notice that you can not only insert content but also style it. Here's an example of the ::after pseudo-element with the same button:
+
+.cta-button {
+  background-color: orange;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cta-button::after {
+  content: '➡️';
+  position: absolute;
+  right: 5px;
+  bottom: 6px;
+  font-size: 1.125rem;
+  transition: transform 0.3s ease;
+}
+In the ::after pseudo-element, the transition property is used to animate changes over 0.3 seconds with an easing effect, creating a smooth and gradual transformation rather than a sudden one. You will learn more about the transition property in future lessons.
+
+You can also attach a pseudo-class to the content you insert into another content with the ::before and ::after pseudo-elements. For example, a hover state for the content. Here's an example:
+
+.cta-button {
+  background-color: orange;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cta-button::after {
+  content: "➡️";
+  position: absolute;
+  right: 5px;
+  bottom: 6px;
+  font-size: 1.125rem;
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover::after {
+  transform: translateX(2px);
+}
+With transform: translateX(2px) in the hover state, the content gets pushed to the right by 2px any time the user hovers on the button. The transition property in the ::after itself ensures the process takes 0.3s.
+
+That's what the transform property does – it allows you to rotate, skew, scale, or translate an element in a particular direction. You will learn more about that in future lessons.
+
+In the next example, we will look at the ::first-letter pseudo-element. The ::first-letter pseudo-element targets the first letter of an element's content, allowing you to style it. Here's an example of some paragraph text:
+
+<p>freeCodeCamp lets you learn to code without having to pay.</p>
+If we want to style the first letter, we can use the ::first-letter pseudo-element like this:
+
+p::first-letter {
+  font-size: 4rem;
+}
+In the last example, we will look at is the ::marker pseudo-element which lets you select the marker, bullet or numbering of list items for styling. The ::marker pseudo-element offers a way to enhance your website's brand identity by customizing list markers to match your color scheme.
+
+Here's an example of an unordered list and an ordered list:
+
+<ul>
+  <li>Unordered list item 1</li>
+  <li>Unordered list item 2</li>
+  <li>Unordered list item 3</li>
+  <li>Unordered list item 4</li>
+</ul>
+
+<ol>
+  <li>Ordered list item 1</li>
+  <li>Ordered list item 2</li>
+  <li>Ordered list item 3</li>
+  <li>Ordered list item 4</li>
+</ol>
+To change the list item's marker color and size, you can use the ::marker pseudo-element like this:
+
+li::marker {
+  color: crimson;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+In this lesson, we have covered only a few pseudo-elements. But there are many more like the ::placeholder, ::spelling-error and ::selection that I encourage you to explore on your own.
+

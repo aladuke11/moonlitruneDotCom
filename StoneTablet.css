@@ -1,0 +1,360 @@
+/* ============================================
+   STONE TABLET - ANCIENT ARTIFACT STYLING
+   ============================================ */
+
+:root {
+    --stone-dark: #2c1d14;
+    --stone-light: #fdf8f3;
+    --stone-medium: #e8ddd4;
+    --obsidian: #1a1a1a;
+    --fire-orange: #d2691e;
+    --fire-red: #8b0000;
+    --ancient-gold: #b8860b;
+    --shadow-brown: #6c584c;
+}
+
+/* ============================================
+   BASE STYLING
+   ============================================ */
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(135deg, var(--stone-light) 0%, var(--stone-medium) 100%);
+    color: var(--stone-dark);
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    min-height: 100vh;
+    position: relative;
+    line-height: 1.6;
+}
+
+/* Ancient parchment texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(160, 82, 45, 0.03) 0%, transparent 50%),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(139, 69, 19, 0.02) 2px,
+            rgba(139, 69, 19, 0.02) 4px
+        );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ============================================
+   TYPOGRAPHY & HEADINGS
+   ============================================ */
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--obsidian);
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 10px rgba(139, 69, 19, 0.2);
+    letter-spacing: 2px;
+    font-weight: bold;
+    position: relative;
+    text-transform: uppercase;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--ancient-gold), transparent);
+    margin: 10px auto;
+    box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: var(--fire-orange);
+    border-bottom: 2px solid var(--shadow-brown);
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+h2::before {
+    content: '◊';
+    position: absolute;
+    left: -1.5rem;
+    color: var(--ancient-gold);
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+    color: var(--fire-red);
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   CONTENT SECTIONS
+   ============================================ */
+
+p {
+    margin-bottom: 1rem;
+    text-align: justify;
+    line-height: 1.7;
+}
+
+strong {
+    color: var(--fire-orange);
+    font-weight: bold;
+}
+
+em {
+    color: var(--shadow-brown);
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   PASSCODE SECTION
+   ============================================ */
+
+.passcode-section {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(160, 82, 45, 0.05));
+    border: 2px solid var(--shadow-brown);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 
+        inset 0 0 20px rgba(139, 69, 19, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.passcode-section::before {
+    content: '⚠';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--stone-light);
+    padding: 0 10px;
+    color: var(--fire-red);
+    font-size: 1.2rem;
+}
+
+input[type="text"] {
+    padding: 0.8rem;
+    width: 60%;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    border: 2px solid var(--shadow-brown);
+    border-radius: 4px;
+    background: var(--stone-light);
+    color: var(--stone-dark);
+    margin-right: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--fire-orange);
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.1),
+        0 0 10px rgba(210, 105, 30, 0.3);
+    background: #fff;
+}
+
+input[type="text"]:disabled {
+    background: #f0f0f0;
+    color: #999;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, var(--fire-orange), #cd853f);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #e2761e, var(--ancient-gold));
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   LOCKED CONTENT
+   ============================================ */
+
+.locked-lore {
+    border-top: 3px dashed var(--shadow-brown);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    position: relative;
+    background: linear-gradient(135deg, rgba(139, 0, 0, 0.05), rgba(184, 134, 11, 0.05));
+    border-radius: 0 0 8px 8px;
+    padding: 1.5rem;
+    animation: revealglow 2s ease-in-out;
+}
+
+.locked-lore::before {
+    content: '🔓 UNLOCKED';
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--stone-light);
+    padding: 0 10px;
+    color: var(--ancient-gold);
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   FEEDBACK MESSAGES
+   ============================================ */
+
+#attempts {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid var(--fire-red);
+    color: var(--fire-red);
+}
+
+.hidden {
+    display: none;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes revealglow {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(184, 134, 11, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(184, 134, 11, 0.6);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    input[type="text"] {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-high-contrast: high) {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    button {
+        background: black;
+        color: white;
+        border: 2px solid black;
+    }
+    
+    input[type="text"] {
+        background: white;
+        color: black;
+        border: 2px solid black;
+    }
+}

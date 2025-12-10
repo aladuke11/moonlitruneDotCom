@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roguelike Reviews</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="reviews.js" defer></script>
+</head>
+<body class="reviews-page">
+    <header>
+        <div class="title-box">
+            <h1>Roguelike Reviews</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-intro">
+            <h2>About These Reviews</h2>
+            <p>Welcome to my collection of roguelike game reviews! I explore the mechanics, art styles, and overall gameplay experiences of various roguelike games. Each review includes my honest thoughts and a star rating.</p>
+        </section>
+
+        <!-- Dynamic reviews container -->
+        <section class="page-content">
+            <h2>Game Reviews</h2>
+            <div id="reviews" class="reviews-container">
+                <!-- Reviews will be loaded here dynamically -->
+            </div>
+        </section>
+
+        <!-- Fallback content if JavaScript fails -->
+        <noscript>
+            <section class="review-list">
+                <h2>Featured Reviews</h2>
+                <p>JavaScript is required to load the full review content. Please enable JavaScript to see all reviews.</p>
+                <ul>
+                    <li>Hades - Excellent narrative-driven roguelike</li>
+                    <li>Dead Cells - Fast-paced action platformer</li>
+                    <li>The Binding of Isaac - Classic roguelike experience</li>
+                    <li>Risk of Rain 2 - Multiplayer roguelike shooter</li>
+                </ul>
+            </section>
+        </noscript>
+
+        <!-- Error message container (hidden by default) -->
+        <section class="error" id="error-message" style="display: none;">
+            <h2>Error Loading Reviews</h2>
+            <p>Sorry, we couldn't load the reviews at this time. Please try again later.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 MoonlitRune's Place</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1693 @@
+/* ============================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   ============================================ */
+:root {
+    /* Core Brand Colors */
+    --color-primary: #00ffff;
+    --color-secondary: #ff0000;
+    --color-accent: #ff8538;
+    --color-text: #00b7ff;
+    --color-background: #000000;
+    --color-surface: rgba(26, 26, 26, 0.8);
+    --color-border: #90bbfd;
+    
+    /* State Colors */
+    --color-online: #00ff88;
+    --color-offline: #ff4444;
+    --color-warning: #ffaa00;
+    --color-success: #00ff88;
+    --color-error: #ff4444;
+    
+    /* Neon Color Palette */
+    --color-neon-indigo: #4300FF;
+    --color-neon-blue: #00BFFF;
+    --color-neon-cyan: #00FFF7;
+    --color-neon-mint: #00FFB2;
+    --color-neon-green: #39FF14;
+    --color-neon-yellow: #F9FF00;
+    --color-neon-orange: #FF9900;
+    --color-neon-pink: #FF4FF8;
+    --color-neon-purple: #B026FF;
+    
+    /* Typography */
+    --font-family-base: 'Times New Roman', Times, serif;
+    --font-size-base: 18px;
+    --line-height-base: 1.6;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.6s ease;
+}
+/* ============================================
+   BASE STYLES & RESET
+   ============================================ */
+
+/* Base document styles */
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    background: url('images/star background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main layout container */
+main {
+    margin: 5vh;
+    padding: var(--spacing-xl);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+/* Heading styles with progressive sizing and glow effects */
+h1 {
+    color: var(--color-primary);
+    margin: 0;
+    font-size: 2.75rem;
+    font-weight: bold;
+    text-shadow: 0 0 8px var(--color-primary), 0 0 15px rgba(0, 255, 255, 0.5);
+    transition: text-shadow var(--transition-normal);
+}
+
+h2 {
+    color: var(--color-accent);
+    margin: 0;
+    font-size: 2.25rem;
+    font-weight: bold;
+    text-shadow: 0 0 6px var(--color-accent), 0 0 12px rgba(255, 133, 56, 0.4);
+    transition: text-shadow var(--transition-normal);
+}
+
+h3 {
+    color: var(--color-neon-cyan);
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--color-neon-cyan), 0 0 10px rgba(0, 255, 247, 0.3);
+    transition: text-shadow var(--transition-normal);
+}
+
+h4 {
+    color: var(--color-text);
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+h5 {
+    color: var(--color-text);
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+h6 {
+    color: var(--color-text);
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Body text styles */
+p {
+    font-size: 1.1rem;
+    line-height: var(--line-height-base);
+    margin: var(--spacing-md) 0;
+}
+
+small {
+    font-size: 0.95rem;
+}
+
+/* Link styles with hover effects */
+a {
+    color: var(--color-neon-cyan);
+    text-decoration: none;
+    text-shadow: 0 0 3px var(--color-neon-cyan);
+    transition: all var(--transition-normal);
+}
+
+a:hover {
+    color: var(--color-neon-orange);
+    text-shadow: 0 0 5px var(--color-neon-orange), 0 0 10px rgba(255, 153, 0, 0.4);
+}
+
+/* ============================================
+   LIST STYLES
+   ============================================ */
+
+/* Base list styling */
+ul {
+    color: var(--color-text);
+    list-style: disc inside;
+    margin: var(--spacing-md) 0;
+    padding: 0 0 0 20px;
+}
+
+ul li {
+    margin: 5px 0;
+    padding: 2px 0;
+    border: none;
+    transition: all var(--transition-normal);
+    text-shadow: 0 0 2px rgba(0, 183, 255, 0.3);
+}
+
+ul li:hover {
+    color: var(--color-neon-orange);
+    text-shadow: 0 0 5px var(--color-neon-orange), 0 0 10px rgba(255, 153, 0, 0.3);
+    transform: translateX(3px);
+}
+
+/* Special styling for lists inside articles */
+.page-content article ul {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 0 0 20px !important;
+    margin: var(--spacing-md) 0 !important;
+    flex: none !important;
+    display: block !important;
+    text-align: left !important;
+    list-style-position: inside !important;
+}
+
+.page-content article ul li {
+    border: none !important;
+    padding: 2px 0 !important;
+}
+/* ============================================
+   LAYOUT COMPONENTS
+   ============================================ */
+
+/* Header styles */
+header {
+    background-color: var(--color-background);
+    padding: var(--spacing-xl);
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Navigation styles */
+nav li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 0;
+    vertical-align: middle;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    transition: all var(--transition-normal);
+    background: #333333;
+    box-shadow: 
+        0 0 5px rgba(0, 255, 255, 0.2),
+        inset 0 0 3px rgba(0, 255, 255, 0.1);
+}
+
+nav li:hover {
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.4),
+        0 0 20px rgba(0, 255, 255, 0.2),
+        inset 0 0 6px rgba(0, 255, 255, 0.15);
+    border-color: var(--color-neon-cyan);
+    transform: translateY(-1px);
+}
+
+nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    margin: 0 15px;
+    display: flex;
+    padding: 8px 0;
+    text-shadow: 0 0 2px rgba(0, 183, 255, 0.3);
+    transition: all var(--transition-normal);
+}
+
+nav a:hover {
+    color: var(--color-primary);
+    text-shadow: 0 0 5px var(--color-primary), 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--color-surface);
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+    margin-top: auto;
+    width: 100%;
+    box-shadow: 
+        0 -2px 10px rgba(0, 255, 255, 0.1),
+        inset 0 0 10px rgba(0, 255, 255, 0.05);
+}
+
+/* ============================================
+   CONTENT CONTAINERS
+   ============================================ */
+
+/* Title box with neon effect */
+.title-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--spacing-xl) 0;
+    border: 1px solid var(--color-primary);
+    min-height: 15vh;
+    background: black;
+    border-radius: 10px;
+    box-shadow: 0 0 20px var(--color-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.title-box h1 {
+    animation: neon-flicker 3s infinite alternate;
+    color: var(--color-primary);
+    font-size: 2.75em;
+    text-shadow: #fc0 1px 0 10px;
+    margin: 0;
+}
+
+/* Page introduction section */
+.page-intro {
+    min-height: 10vh;
+    display: block;
+    margin: 5vh;
+    padding: var(--spacing-xl);
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    border-radius: 10px;
+    box-shadow: 
+        0 0 10px var(--color-primary),
+        0 0 20px rgba(0, 255, 255, 0.2),
+        inset 0 0 10px rgba(0, 255, 255, 0.05);
+    color: var(--color-text);
+    transition: box-shadow var(--transition-normal);
+}
+
+.page-intro:hover {
+    box-shadow: 
+        0 0 15px var(--color-primary),
+        0 0 30px rgba(0, 255, 255, 0.3),
+        inset 0 0 15px rgba(0, 255, 255, 0.08);
+}
+
+/* Enhanced page content headers */
+.page-content h2 {
+    margin-top: 0;
+    justify-content: center;
+    text-align: center;
+    border: 2px solid var(--color-primary);
+    border-radius: 10px;
+    background: var(--color-surface);
+    padding: 10px;
+    width: fit-content;
+    margin: 0 auto;
+    box-shadow: 
+        0 0 8px rgba(0, 255, 255, 0.3),
+        inset 0 0 8px rgba(0, 255, 255, 0.1);
+    transition: all var(--transition-normal);
+}
+
+.page-content h2:hover {
+    box-shadow: 
+        0 0 15px rgba(0, 255, 255, 0.4),
+        inset 0 0 12px rgba(0, 255, 255, 0.15);
+    text-shadow: 0 0 8px var(--color-accent), 0 0 16px rgba(255, 133, 56, 0.5);
+}
+
+/* ============================================
+   ARTICLE & CONTENT STYLING
+   ============================================ */
+
+/* Enhanced article containers */
+.page-content article {
+    display: flex;
+    flex-direction: column;
+    margin: var(--spacing-md) auto;
+    padding: var(--spacing-xl);
+    border: 1px solid var(--color-primary);
+    border-radius: 10px;
+    background: var(--color-surface);
+    box-shadow: 
+        0 0 5px var(--color-primary),
+        0 0 15px rgba(0, 255, 255, 0.15);
+    width: 75%;
+    transition: all var(--transition-normal);
+}
+
+.page-content article:hover {
+    box-shadow: 
+        0 0 10px var(--color-primary),
+        0 0 25px rgba(0, 255, 255, 0.25),
+        inset 0 0 5px rgba(0, 255, 255, 0.05);
+    border-color: var(--color-neon-cyan);
+}
+
+/* Enhanced h3 styling within articles */
+.page-content article h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 8px 15px;
+    border: 1px solid var(--color-neon-cyan);
+    border-radius: 6px;
+    background: rgba(0, 255, 247, 0.05);
+    box-shadow: 
+        0 0 5px rgba(0, 255, 247, 0.2),
+        inset 0 0 3px rgba(0, 255, 247, 0.1);
+    transition: all var(--transition-normal);
+}
+
+.page-content article h3:hover {
+    box-shadow: 
+        0 0 10px rgba(0, 255, 247, 0.4),
+        inset 0 0 6px rgba(0, 255, 247, 0.15);
+    text-shadow: 0 0 8px var(--color-neon-cyan), 0 0 15px rgba(0, 255, 247, 0.4);
+}
+
+/* Enhanced paragraph styling within articles */
+.page-content article p {
+    text-shadow: 0 0 1px rgba(0, 183, 255, 0.2);
+    transition: text-shadow var(--transition-normal);
+}
+
+.page-content article p:hover {
+    text-shadow: 0 0 3px rgba(0, 183, 255, 0.3);
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-neon-mint);
+    border-radius: 30px;
+    background-color: black;
+    color: var(--color-neon-mint);
+    width: 80%;
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+.socialLink:hover {
+    box-shadow: 0 0 10px var(--color-neon-mint),
+      0 0 20px rgba(0, 255, 178, 0.3);
+    border-color: var(--color-neon-mint);
+}
+.social-block {
+    background-color: var(--color-surface);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 0 5px var(--color-neon-orange),
+      inset 0 0 4px var(--color-accent);
+    border-radius: 30px;
+    width: 75%;
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 2rem;
+    transition: all var(--transition-normal);
+}
+.project-description {
+    color: var(--color-neon-mint);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-neon-mint);
+    box-shadow: inset 0 0 5px var(--color-neon-mint);
+    width: 100%;
+    max-width: 800px;
+    margin: 4rem auto 2rem auto;
+}
+code.codeSnip {
+    display: block;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 0 8px var(--color-primary),
+      inset 0 0 5px rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 900px;
+    color: var(--color-text);
+    font-family: 'Courier New', Courier, monospace;
+    overflow-x: auto;
+}
+.copyCode {
+    display: block;
+    margin: 0 auto 2rem auto;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 0 8px var(--color-primary);
+    transition: all var(--transition-normal);
+
+}
+.copyCode:hover {
+    background-color: var(--color-neon-cyan);
+    box-shadow: 0 0 12px var(--color-neon-cyan);
+}
+.copyCode:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px var(--color-neon-cyan);
+}
+.copyButton {
+  padding: 12px 24px;
+  margin-top: 15px;
+  background-color: #00ff00;
+  color: #000;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.copyButton:hover {
+  background-color: #00cc00;
+  border-color: #00cc00;
+}
+
+.copyButton:active {
+  transform: scale(0.98);
+}
+
+/* Profile figure styling */
+.profile-figure {
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bioImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid var(--color-neon-mint);
+    box-shadow: 0 0 10px var(--color-neon-mint), 0 0 20px rgba(0, 255, 178, 0.3);
+    transition: all var(--transition-normal);
+}
+
+.bioImage:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--color-neon-mint), 0 0 30px rgba(0, 255, 178, 0.5);
+}
+
+.profile-figure figcaption {
+    margin-top: 0.8rem;
+    color: var(--color-neon-mint);
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--color-neon-mint);
+}
+
+/* ============================================
+   IMAGE & FIGURE STYLING
+   ============================================ */
+
+/* Enhanced images with glow */
+.page-content article img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 
+        0 0 5px var(--color-primary),
+        0 0 15px rgba(0, 255, 255, 0.2);
+    flex-shrink: 0;
+    transition: all var(--transition-normal);
+}
+
+.page-content article img:hover {
+    box-shadow: 
+        0 0 10px var(--color-primary),
+        0 0 25px rgba(0, 255, 255, 0.4),
+        0 0 35px rgba(0, 255, 255, 0.2);
+}
+
+/* Enhanced figure and figcaption styling */
+figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all var(--transition-normal);
+}
+
+figcaption {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: var(--color-neon-cyan);
+    text-align: center;
+    text-shadow: 0 0 3px var(--color-neon-cyan), 0 0 6px rgba(0, 255, 247, 0.3);
+    transition: all var(--transition-normal);
+}
+
+figcaption:hover {
+    color: var(--color-neon-orange);
+    text-shadow: 0 0 5px var(--color-neon-orange), 0 0 10px rgba(255, 153, 0, 0.4);
+}
+
+/* ============================================
+   CONTENT ROW STYLING
+   ============================================ */
+
+/* Enhanced content row styling */
+.content-row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    box-shadow: 
+        0 0 3px rgba(0, 255, 255, 0.1),
+        inset 0 0 5px rgba(0, 255, 255, 0.05);
+    transition: all var(--transition-normal);
+}
+
+.content-row:hover {
+    box-shadow: 
+        0 0 8px rgba(0, 255, 255, 0.2),
+        inset 0 0 8px rgba(0, 255, 255, 0.08);
+    border-color: rgba(0, 255, 255, 0.2);
+}
+
+/* Enhanced reviews section */
+.reviews {
+    background: rgba(0, 0, 0, 0.8);
+    padding: var(--spacing-xl);
+    border-radius: 10px;
+    box-shadow: 
+        0 0 10px rgba(0, 255, 247, 0.2),
+        inset 0 0 5px rgba(0, 255, 247, 0.1);
+    color: var(--color-text);
+    margin: var(--spacing-xl) auto;
+    width: calc(100% - 40px);
+}
+
+/* Review image styling */
+.review-image {
+    margin: var(--spacing-md) 0;
+    text-align: center;
+}
+
+.review-image img {
+    max-width: 100%;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 
+        0 0 8px var(--color-primary),
+        0 0 20px rgba(0, 255, 255, 0.2);
+    transition: all var(--transition-normal);
+}
+
+.review-image img:hover {
+    box-shadow: 
+        0 0 15px var(--color-primary),
+        0 0 35px rgba(0, 255, 255, 0.4);
+    transform: scale(1.02);
+}
+
+/* Responsive image sizing */
+@media (max-width: 768px) {
+    .review-image img {
+        max-height: 200px;
+    }
+}
+
+/* ============================================
+   ANIMATIONS & EFFECTS
+   ============================================ */
+
+/* Subtle glow pulse animation for key elements */
+@keyframes subtle-glow-pulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 5px var(--color-primary),
+            0 0 15px rgba(0, 255, 255, 0.15);
+    }
+    50% {
+        box-shadow: 
+            0 0 8px var(--color-primary),
+            0 0 25px rgba(0, 255, 255, 0.25);
+    }
+}
+
+/* Gentle pulse for article containers */
+@keyframes article-gentle-pulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 5px var(--color-primary),
+            0 0 15px rgba(0, 255, 255, 0.15);
+    }
+    50% {
+        box-shadow: 
+            0 0 8px var(--color-primary),
+            0 0 20px rgba(0, 255, 255, 0.2);
+    }
+}
+
+/* Neon flicker effect for title */
+@keyframes neon-flicker {
+    0%, 85%, 100% {
+        text-shadow: 0 0 5px var(--color-primary), 
+                     0 0 10px var(--color-primary), 
+                     0 0 15px var(--color-primary),
+                     0 0 20px var(--color-primary),
+                     0 0 25px #0099ff,
+                     0 0 30px #0066ff;
+        opacity: 1;
+    }
+    87%, 89%, 91% {        
+        text-shadow: 0 0 2px var(--color-primary), 
+                     0 0 5px var(--color-primary);
+        opacity: 0.7;
+    }
+    88%, 90% {
+        text-shadow: none;
+        opacity: 0.3;
+    }
+}
+
+/* Row selection pulse animation */
+@keyframes row-selected-pulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 15px rgba(249, 255, 0, 0.6),
+            inset 0 0 8px rgba(249, 255, 0, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 0 25px rgba(249, 255, 0, 0.8),
+            inset 0 0 12px rgba(249, 255, 0, 0.3);
+    }
+}
+
+/* Row shift animation */
+@keyframes row-shift {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(20px);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Apply animations to appropriate elements */
+.title-box,
+.page-intro,
+.page-content h2,
+nav li {
+    animation: subtle-glow-pulse 4s ease-in-out infinite;
+}
+
+.page-content article {
+    animation: article-gentle-pulse 6s ease-in-out infinite;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Desktop and tablet responsiveness */
+@media (min-width: 768px) {
+    .content-row {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: var(--spacing-xl);
+    }
+    
+    .content-row figure {
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+    
+    .content-row ul {
+        flex: 1;
+        max-width: none;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 767px) {
+    main {
+        font-size: 16px;
+        padding: 10px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    article h3 {
+        width: calc(100% - 30px);
+    }
+    
+    .content-row {
+        align-items: flex-start;
+    }
+    
+    .content-row figure {
+        align-self: center;
+    }
+    
+    section .page-intro h2 {
+        width: calc(100% - 30px);
+        padding: 15px;
+    }
+    
+    section .page-intro {
+        width: calc(100% - 10%);
+        padding: 15px;
+        margin: 0 auto;
+    }
+}
+
+/* ============================================
+   REVIEWS/NEWS FEED STYLING
+   ============================================ */
+
+/* Reviews container */
+.reviews-container {
+    width: 85%;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+/* Individual review cards */
+.review-card {
+    background: var(--color-surface);
+    border-left: 4px solid var(--color-primary);
+    border-radius: 0 8px 8px 0;
+    padding: 2rem;
+    margin-bottom: var(--spacing-xxl);
+    box-shadow: 
+        0 2px 10px rgba(0, 255, 255, 0.1),
+        inset 0 0 10px rgba(0, 255, 255, 0.05);
+    transition: all var(--transition-normal);
+    position: relative;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.review-card:hover {
+    border-left-color: var(--color-neon-cyan);
+    box-shadow: 
+        0 4px 20px rgba(0, 255, 255, 0.2),
+        inset 0 0 15px rgba(0, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.review-card:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Review card headings */
+.review-card h3 {
+    color: var(--color-neon-cyan);
+    margin-bottom: var(--spacing-sm);
+    font-size: 2rem;
+    text-shadow: 0 0 8px var(--color-neon-cyan);
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+/* Review metadata */
+.review-meta {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.9rem;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+/* Genre badges */
+.genre {
+    background: linear-gradient(135deg, var(--color-neon-orange), #ff6b35);
+    color: var(--color-background);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Developer attribution */
+.developer {
+    color: var(--color-neon-mint);
+    font-style: italic;
+    font-weight: bold;
+    text-shadow: 0 0 3px var(--color-neon-mint);
+}
+
+.developer::before {
+    content: "by ";
+    color: var(--color-text);
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* Review text content */
+.review-text {
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    text-align: justify;
+    color: var(--color-text);
+    text-shadow: 0 0 1px rgba(0, 183, 255, 0.2);
+}
+
+/* Enhanced first letter styling */
+.review-text::first-letter {
+    font-size: 3rem;
+    float: left;
+    line-height: 2.5rem;
+    margin: 0.2rem var(--spacing-sm) 0 0;
+    color: var(--color-neon-cyan);
+    text-shadow: 0 0 10px var(--color-neon-cyan);
+    font-weight: bold;
+}
+
+/* Rating display */
+.rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.stars {
+    font-size: 1.4rem;
+    color: var(--color-neon-yellow);
+    text-shadow: 0 0 5px var(--color-neon-yellow);
+    letter-spacing: 3px;
+}
+
+.rating-text {
+    color: var(--color-neon-cyan);
+    font-weight: bold;
+    font-size: 1rem;
+    text-shadow: 0 0 3px var(--color-neon-cyan);
+}
+
+/* Article separator line */
+.review-card:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: -1.5rem;
+    left: 2rem;
+    right: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.3;
+}
+
+/* ============================================
+   PAGE-SPECIFIC LAYOUT OVERRIDES
+   ============================================ */
+
+/* Main container override for reviews page */
+body:has(.reviews-container) main,
+.reviews-container main {
+    margin: 2vh 0;
+    padding: 0;
+}
+
+/* Reviews page specific overrides */
+.reviews-page main {
+    margin: 2vh 0;
+    padding: 0;
+    max-width: 100%;
+}
+
+.reviews-page .page-intro,
+.reviews-page .page-content {
+    margin: 2vh auto;
+    max-width: 85%;
+}
+
+.reviews-page .page-content h2 {
+    margin: 2rem auto;
+}
+
+.reviews-page .page-content article {
+    width: 100%;
+    max-width: none;
+}
+
+/* Mobile responsiveness for reviews/news feed */
+@media (max-width: 768px) {
+    .reviews-container {
+        width: 95%;
+        padding: 0 var(--spacing-md);
+    }
+    
+    .review-card {
+        padding: var(--spacing-lg);
+        margin-bottom: 2rem;
+    }
+    
+    .review-card h3 {
+        font-size: 1.6rem;
+    }
+    
+    .review-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .review-text {
+        font-size: 1rem;
+        text-align: left;
+    }
+    
+    .review-text::first-letter {
+        font-size: 2.5rem;
+        line-height: 2rem;
+    }
+    
+    .rating {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .reviews-container {
+        width: 90%;
+        padding: 0 var(--spacing-lg);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Focus states for better accessibility */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--color-neon-cyan);
+    outline-offset: 2px;
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text: #ffffff;
+        --color-background: #000000;
+        --color-surface: rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    body {
+        background: none;
+        color: black;
+    }
+    
+    .title-box,
+    .page-intro,
+    .page-content article {
+        box-shadow: none;
+        border: 1px solid black;
+    }
+    
+    nav,
+    footer {
+        display: none;
+    }
+    
+    .review-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================
+   COMPONENT STATES
+   ============================================ */
+
+/* Loading state */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error state */
+.error {
+    border-color: var(--color-error);
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+/* Success state */
+.success {
+    border-color: var(--color-success);
+    background-color: rgba(0, 255, 136, 0.1);
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* GPU acceleration for animations */
+.title-box,
+.page-intro,
+.page-content h2,
+nav li,
+.page-content article {
+    will-change: transform, box-shadow;
+}
+
+/* Optimize font rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ============================================
+   TIC TAC TOE GAME STYLING
+   ============================================ */
+
+/* Game container */
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    text-align: center;
+}
+
+.container h1 {
+    color: var(--color-primary);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 0 10px var(--color-primary), 0 0 20px rgba(0, 255, 255, 0.5);
+    animation: neon-flicker 3s infinite alternate;
+}
+
+/* Game controls */
+.game-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.shift-button {
+    background: var(--color-surface);
+    border: 2px solid var(--color-neon-purple);
+    border-radius: 8px;
+    color: var(--color-neon-purple);
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-shadow: 0 0 3px var(--color-neon-purple);
+    box-shadow: 
+        0 0 8px rgba(176, 38, 255, 0.2),
+        inset 0 0 5px rgba(176, 38, 255, 0.1);
+}
+
+.shift-button:hover {
+    background: rgba(176, 38, 255, 0.1);
+    border-color: var(--color-neon-pink);
+    color: var(--color-neon-pink);
+    text-shadow: 0 0 8px var(--color-neon-pink);
+    box-shadow: 
+        0 0 15px rgba(255, 79, 248, 0.4),
+        inset 0 0 8px rgba(255, 79, 248, 0.15);
+    transform: translateY(-2px);
+}
+
+.shift-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.shift-instructions {
+    color: var(--color-neon-cyan);
+    font-size: 0.9rem;
+    text-shadow: 0 0 3px var(--color-neon-cyan);
+    text-align: center;
+}
+
+/* Game message */
+.game-message {
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.2),
+        inset 0 0 5px rgba(0, 255, 255, 0.1);
+    transition: all var(--transition-normal);
+}
+
+.win-message {
+    border-color: var(--color-neon-orange);
+    color: var(--color-neon-orange);
+    text-shadow: 0 0 5px var(--color-neon-orange);
+    box-shadow: 
+        0 0 15px rgba(255, 153, 0, 0.4),
+        inset 0 0 8px rgba(255, 153, 0, 0.1);
+    animation: subtle-glow-pulse 2s ease-in-out infinite;
+}
+
+.tie-message {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    text-shadow: 0 0 5px var(--color-accent);
+    box-shadow: 
+        0 0 15px rgba(255, 133, 56, 0.4),
+        inset 0 0 8px rgba(255, 133, 56, 0.1);
+}
+
+/* Game board */
+.game-board {
+    display: grid;
+    grid-template-columns: 40px repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 3px;
+    width: 420px;
+    height: 350px;
+    margin: 0 auto var(--spacing-xl);
+    background: var(--color-primary);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 
+        0 0 20px var(--color-primary),
+        0 0 40px rgba(0, 255, 255, 0.3),
+        inset 0 0 10px rgba(0, 255, 255, 0.1);
+    transition: all var(--transition-normal);
+}
+
+/* Row labels */
+.row-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface);
+    border: 2px solid var(--color-neon-orange);
+    border-radius: 6px;
+    color: var(--color-neon-orange);
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-shadow: 0 0 5px var(--color-neon-orange);
+    box-shadow: 
+        0 0 5px rgba(255, 153, 0, 0.2),
+        inset 0 0 3px rgba(255, 153, 0, 0.1);
+}
+
+.row-label:hover {
+    background: rgba(255, 153, 0, 0.1);
+    border-color: var(--color-neon-yellow);
+    color: var(--color-neon-yellow);
+    text-shadow: 0 0 8px var(--color-neon-yellow);
+    box-shadow: 
+        0 0 12px rgba(249, 255, 0, 0.4),
+        inset 0 0 6px rgba(249, 255, 0, 0.15);
+    transform: scale(1.05);
+}
+
+.row-label.selected {
+    background: rgba(249, 255, 0, 0.2);
+    border-color: var(--color-neon-yellow);
+    color: var(--color-neon-yellow);
+    text-shadow: 0 0 10px var(--color-neon-yellow);
+    box-shadow: 
+        0 0 15px rgba(249, 255, 0, 0.6),
+        inset 0 0 8px rgba(249, 255, 0, 0.2);
+    animation: row-selected-pulse 1s ease-in-out infinite;
+}
+
+/* Game board animations */
+.game-board.game-won {
+    animation: celebration-pulse 1s ease-in-out;
+}
+
+.game-board.game-tie {
+    animation: tie-shake 1s ease-in-out;
+}
+
+.game-board.game-restart {
+    animation: restart-flash 0.5s ease-in-out;
+}
+
+/* Individual cells */
+.cell {
+    background: #000000 !important;
+    border: 3px solid #00ffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.3),
+        inset 0 0 10px rgba(0, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    color: #ffffff !important;
+    text-shadow: 0 0 10px #ffffff !important;
+}
+
+.cell:hover {
+    background: #000000 !important;
+    border-color: #00ffff !important;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.6),
+        inset 0 0 15px rgba(0, 255, 255, 0.2);
+    transform: scale(1.08);
+}
+
+.cell.cell-hover {
+    background: #000000 !important;
+    border-color: #00ffff !important;
+}
+
+/* Player X styling - ELECTRIC BLUE */
+.cell.player-x {
+    color: #00DDFF !important;
+    text-shadow: 
+        0 0 5px #ffffff,
+        0 0 10px #00DDFF, 
+        0 0 20px #00DDFF,
+        0 0 30px #00DDFF,
+        0 0 40px #00DDFF !important;
+    background: #000000 !important;
+    border-color: #00DDFF !important;
+    border-width: 4px !important;
+    font-weight: 900 !important;
+    font-size: 4rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+/* Player O styling - ELECTRIC RED */
+.cell.player-o {
+    color: #FF0080 !important;
+    text-shadow: 
+        0 0 5px #ffffff,
+        0 0 10px #FF0080, 
+        0 0 20px #FF0080,
+        0 0 30px #FF0080,
+        0 0 40px #FF0080 !important;
+    background: #000000 !important;
+    border-color: #FF0080 !important;
+    border-width: 4px !important;
+    font-weight: 900 !important;
+    font-size: 4rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+/* Winning cells highlight */
+.cell.winning-cell {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 15px #ffffff, 0 0 25px rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.5),
+        inset 0 0 10px rgba(255, 255, 255, 0.2) !important;
+    animation: winning-glow 2s ease-in-out infinite;
+}
+
+/* Cell placement animation */
+.cell.cell-placed {
+    animation: cell-place 0.3s ease-out;
+}
+
+/* Restart button */
+.restart-button {
+    background: var(--color-surface);
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-shadow: 0 0 3px var(--color-accent);
+    box-shadow: 
+        0 0 8px rgba(255, 133, 56, 0.2),
+        inset 0 0 5px rgba(255, 133, 56, 0.1);
+}
+
+.restart-button:hover {
+    background: rgba(255, 133, 56, 0.1);
+    border-color: var(--color-neon-orange);
+    color: var(--color-neon-orange);
+    text-shadow: 0 0 8px var(--color-neon-orange);
+    box-shadow: 
+        0 0 15px rgba(255, 153, 0, 0.4),
+        inset 0 0 8px rgba(255, 153, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.restart-button:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 0 10px rgba(255, 153, 0, 0.3),
+        inset 0 0 6px rgba(255, 153, 0, 0.1);
+}
+
+/* ============================================
+   TIC TAC TOE ANIMATIONS
+   ============================================ */
+
+/* Cell placement animation */
+@keyframes cell-place {
+    0% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(90deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Winning cell glow animation */
+@keyframes winning-glow {
+    0%, 100% {
+        box-shadow: 
+            0 0 20px rgba(255, 255, 255, 0.5),
+            inset 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 0 30px rgba(255, 255, 255, 0.8),
+            inset 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Celebration pulse animation */
+@keyframes celebration-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 
+            0 0 20px var(--color-primary),
+            0 0 40px rgba(0, 255, 255, 0.3);
+    }
+    25% {
+        transform: scale(1.05);
+        box-shadow: 
+            0 0 30px var(--color-neon-orange),
+            0 0 60px rgba(255, 153, 0, 0.5);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 
+            0 0 40px #ffffff,
+            0 0 80px rgba(255, 255, 255, 0.4);
+    }
+    75% {
+        transform: scale(1.05);
+        box-shadow: 
+            0 0 30px var(--color-neon-orange),
+            0 0 60px rgba(255, 153, 0, 0.5);
+    }
+}
+
+/* Tie game shake animation */
+@keyframes tie-shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Restart flash animation */
+@keyframes restart-flash {
+    0% {
+        background: var(--color-primary);
+        box-shadow: 0 0 50px var(--color-primary);
+    }
+    50% {
+        background: rgba(0, 255, 255, 0.3);
+        box-shadow: 0 0 80px rgba(0, 255, 255, 0.6);
+    }
+    100% {
+        background: transparent;
+        box-shadow: 
+            0 0 20px var(--color-primary),
+            0 0 40px rgba(0, 255, 255, 0.3);
+    }
+}
+
+/* ============================================
+   TIC TAC TOE RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet and smaller desktop */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-md);
+    }
+    
+    .container h1 {
+        font-size: 2.5rem;
+    }
+    
+    .game-board {
+        width: 350px;
+        height: 290px;
+        grid-template-columns: 35px repeat(5, 1fr);
+    }
+    
+    .cell {
+        font-size: 2.2rem;
+    }
+    
+    .row-label {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: var(--spacing-sm);
+    }
+    
+    .container h1 {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .game-board {
+        width: 300px;
+        height: 250px;
+        grid-template-columns: 30px repeat(5, 1fr);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .cell {
+        font-size: 1.8rem;
+    }
+    
+    .row-label {
+        font-size: 0.9rem;
+    }
+    
+    .game-message {
+        font-size: 1rem;
+        padding: var(--spacing-sm);
+    }
+    
+    .restart-button, .shift-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
+
+/* ============================================
+   GAME MODE AND DIFFICULTY CONTROLS
+   ============================================ */
+
+/* Game mode selection */
+.game-mode {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.mode-button {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-shadow: 0 0 2px rgba(0, 183, 255, 0.3);
+    box-shadow: 
+        0 0 5px rgba(0, 255, 255, 0.1),
+        inset 0 0 3px rgba(0, 255, 255, 0.05);
+}
+
+.mode-button:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    text-shadow: 0 0 5px var(--color-primary);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.3),
+        inset 0 0 5px rgba(0, 255, 255, 0.1);
+}
+
+.mode-button.active {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    text-shadow: 0 0 5px var(--color-primary);
+    box-shadow: 
+        0 0 15px rgba(0, 255, 255, 0.4),
+        inset 0 0 8px rgba(0, 255, 255, 0.15);
+}
+
+/* CPU difficulty selection */
+.cpu-difficulty {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.cpu-difficulty label {
+    color: var(--color-neon-cyan);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-shadow: 0 0 3px var(--color-neon-cyan);
+}
+
+#difficulty-select {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text);
+    padding: 4px 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+#difficulty-select:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+#difficulty-select:focus {
+    outline: none;
+    border-color: var(--color-neon-cyan);
+    box-shadow: 0 0 12px rgba(0, 255, 247, 0.4);
+}
+
+/* ============================================
+   END OF STYLESHEET
+   ============================================ */

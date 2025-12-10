@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CSS Pseudo-Classes Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tutorial-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 5px;
+        }
+
+        .example {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #ffd700;
+        }
+
+        .code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        /* Interactive Examples */
+
+        /* :hover example */
+        .hover-demo {
+            background: #4299e1;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .hover-demo:hover {
+            background: #ff6b6b;
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* :nth-child example */
+        .list-demo {
+            list-style: none;
+        }
+
+        .list-demo li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #4a5568;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .list-demo li:nth-child(odd) {
+            background: #ed8936;
+        }
+
+        .list-demo li:nth-child(even) {
+            background: #38b2ac;
+        }
+
+        .list-demo li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* :first-child and :last-child */
+        .first-last-demo p {
+            padding: 10px;
+            margin: 5px 0;
+            background: #4a5568;
+            border-radius: 5px;
+        }
+
+        .first-last-demo p:first-child {
+            background: #48bb78;
+            font-weight: bold;
+        }
+
+        .first-last-demo p:last-child {
+            background: #f56565;
+            font-weight: bold;
+        }
+
+        /* :focus example */
+        .focus-demo input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #4a5568;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .focus-demo input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            background: #2d3748;
+            color: white;
+        }
+
+        /* :checked example */
+        .checkbox-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #ffd700;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + label {
+            color: #ffd700;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Interactive buttons */
+        .try-button {
+            background: #ffd700;
+            color: #2d3748;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .try-button:hover {
+            background: #f6e05e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .try-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Quiz section */
+        .quiz {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+        }
+
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+
+        .answer {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #48bb78;
+            border-radius: 5px;
+        }
+
+        .show-answer {
+            display: block;
+        }
+
+        .playground {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .playground textarea {
+            width: 100%;
+            height: 200px;
+            background: #2d3748;
+            color: #e2e8f0;
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        .playground textarea:focus {
+            border-color: #ffd700;
+            outline: none;
+        }
+
+        .result-frame {
+            width: 100%;
+            height: 200px;
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            background: white;
+        }
+
+        /* Functional Pseudo-class Examples */
+        
+        /* :is() demo */
+        .is-demo :is(button, a.button, input[type='submit'], input[type='reset']) {
+            background: darkblue;
+            color: white;
+            border: 1px solid darkblue;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .is-demo :is(button, a.button, input[type='submit'], input[type='reset']):hover {
+            background: lightblue;
+            border-color: lightblue;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .is-demo a.button {
+            text-decoration: none;
+        }
+
+        /* :where() demo */
+        .where-demo :where(h1, h2, h3) {
+            margin: 0;
+            padding: 10px 0;
+            color: #4a5568;
+            transition: all 0.3s ease;
+        }
+
+        .where-demo h1 {
+            color: #ffd700;
+            font-size: 2rem;
+        }
+
+        .where-demo h2 {
+            color: #48bb78;
+            font-size: 1.5rem;
+        }
+
+        .where-demo h3 {
+            color: #4299e1;
+            font-size: 1.2rem;
+        }
+
+        /* :has() demo */
+        .has-demo article {
+            background: rgba(74, 85, 104, 0.1);
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .has-demo article:has(h2) {
+            border: 3px solid hotpink;
+            background: rgba(255, 20, 147, 0.1);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .has-demo article h2, .has-demo article h3 {
+            margin: 0 0 10px 0;
+            color: inherit;
+        }
+
+        /* :not() demo */
+        .not-demo button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .not-demo button.primary {
+            background: deepskyblue;
+            color: white;
+        }
+
+        .not-demo button:not(.primary) {
+            background: #718096;
+            color: white;
+        }
+
+        .not-demo button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Advanced demo */
+        .advanced-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .advanced-demo .card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4a5568;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .advanced-demo .card:has(img) {
+            border: 3px solid #48bb78;
+            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .advanced-demo .card:not(:has(img)):not(:has(p)) {
+            opacity: 0.5;
+            border: 2px dashed #f56565;
+        }
+
+        .advanced-demo .card h3 {
+            margin: 0 0 10px 0;
+            color: #ffd700;
+        }
+
+        .advanced-demo .card img {
+            width: 100%;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .advanced-demo .card p {
+            margin: 10px 0 0 0;
+            color: #e2e8f0;
+        }
+
+        /* Form Demo Styles */
+        .form-demo {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-demo label {
+            display: block;
+            margin-bottom: 5px;
+            color: #e2e8f0;
+        }
+
+        .form-demo input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #4a5568;
+            border-radius: 5px;
+            background: #2d3748;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-demo input:valid {
+            border-color: #48bb78;
+            box-shadow: 0 0 5px rgba(72, 187, 120, 0.3);
+        }
+
+        .form-demo input:invalid {
+            border-color: #f56565;
+            box-shadow: 0 0 5px rgba(245, 101, 101, 0.3);
+        }
+
+        .form-demo input:required {
+            border-left: 4px solid #ffd700;
+        }
+
+        .form-demo input:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 10px rgba(66, 153, 225, 0.5);
+        }
+
+        .form-demo button {
+            padding: 12px 24px;
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-demo button:disabled {
+            background: #4a5568;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* nth Pattern Demos */
+        .nth-patterns {
+            display: grid;
+            gap: 20px;
+        }
+
+        .pattern-demo h4 {
+            color: #ffd700;
+            margin: 0 0 10px 0;
+        }
+
+        .items {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .items span {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #4a5568;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .pattern-demo[data-pattern="2n"] .items span:nth-child(2n) {
+            background: #4299e1;
+            transform: scale(1.1);
+        }
+
+        .pattern-demo[data-pattern="3n+1"] .items span:nth-child(3n+1) {
+            background: #ed8936;
+            transform: scale(1.1);
+        }
+
+        .pattern-demo[data-pattern="-n+3"] .items span:nth-child(-n+3) {
+            background: #48bb78;
+            transform: scale(1.1);
+        }
+
+        /* Structural Demo */
+        .structural-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .container-demo {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .container-demo h3 {
+            color: #ffd700;
+            margin: 0 0 15px 0;
+        }
+
+        .container-demo article {
+            background: #4a5568;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .container-demo article:first-of-type {
+            background: #48bb78;
+        }
+
+        .container-demo article:last-of-type {
+            background: #f56565;
+        }
+
+        .container-demo .box {
+            width: 100px;
+            height: 40px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .container-demo .box:empty {
+            background: #4a5568;
+            border: 2px dashed #cbd5e0;
+        }
+
+        .container-demo .box:not(:empty) {
+            background: #4299e1;
+        }
+
+        /* Link Demo */
+        .link-demo {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .demo-link {
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            color: #4299e1;
+        }
+
+        .demo-link:visited {
+            color: #805ad5;
+        }
+
+        .demo-link:hover {
+            color: #f56565;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .demo-link:active {
+            color: #ed8936;
+            transform: translateY(0);
+        }
+
+        .demo-link:focus {
+            outline: 2px solid #ffd700;
+            outline-offset: 2px;
+        }
+
+        /* UI Demo */
+        .ui-demo {
+            display: grid;
+            gap: 20px;
+        }
+
+        .toggle-section, .control-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .toggle-section label {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #4a5568;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .toggle-section input:checked + label {
+            background: #48bb78;
+            transform: scale(1.05);
+        }
+
+        .feature-content, .radio-content {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #48bb78;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .toggle-section input:checked ~ .feature-content,
+        .toggle-section input:checked ~ .radio-content {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ui-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #4299e1;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ui-btn:enabled:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .ui-btn:disabled {
+            background: #4a5568;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* Target Demo */
+        .target-demo {
+            margin: 20px 0;
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-nav a {
+            padding: 10px 20px;
+            background: #4a5568;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        .tab-nav a:hover {
+            background: #4299e1;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+
+        .tab-content:target {
+            display: block;
+            animation: fadeIn 0.5s ease;
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Browser Support Table */
+        .support-table {
+            display: grid;
+            gap: 10px;
+        }
+
+        .support-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            gap: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            align-items: center;
+        }
+
+        .pseudo-name {
+            font-family: 'Courier New', monospace;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .support-status {
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .support-status.excellent {
+            background: #48bb78;
+            color: white;
+        }
+
+        .support-status.good {
+            background: #ed8936;
+            color: white;
+        }
+
+        .support-status.limited {
+            background: #f56565;
+            color: white;
+        }
+
+        /* Reference Grid */
+        .reference-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .ref-category {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .ref-category h4 {
+            color: #ffd700;
+            margin: 0 0 10px 0;
+        }
+
+        .ref-category ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ref-category li {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ref-category code {
+            color: #4299e1;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .playground {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-demo {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .advanced-demo {
+                grid-template-columns: 1fr;
+            }
+
+            .is-demo :is(button, a.button, input[type='submit'], input[type='reset']) {
+                display: block;
+                margin: 5px 0;
+                width: 100%;
+            }
+
+            .structural-demo {
+                grid-template-columns: 1fr;
+            }
+
+            .link-demo {
+                flex-direction: column;
+            }
+
+            .tab-nav {
+                flex-wrap: wrap;
+            }
+
+            .support-row {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .reference-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cheat-sheet {
+                flex-direction: column;
+            }
+        }
+
+        /* Cheat Sheet Styles */
+        .cheat-sheet {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .cheat-item {
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .cheat-item:hover {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .cheat-item code {
+            display: block;
+            color: #4299e1;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cheat-item span {
+            color: #a9aec4;
+            font-size: 0.9rem;
+        }
+
+        .cheat-example {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid #ffd700;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            color: #e2e8f0;
+        }
+
+        /* Pseudo-Element Demo Styles */
+        .pseudo-element-demo {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .star-button {
+            background: darkblue;
+            color: white;
+            border: 1px solid darkblue;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .star-button::before {
+            content: "⭐ ";
+            color: gold;
+        }
+
+        .arrow-button {
+            background: orange;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .arrow-button::after {
+            content: " ➡️";
+            transition: transform 0.3s ease;
+        }
+
+        .animated-button {
+            background: lightseagreen;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .animated-button::after {
+            content: " ✨";
+            transition: transform 0.3s ease;
+        }
+
+        .animated-button:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* First Letter Demos */
+        .first-letter-demo {
+            margin: 20px 0;
+        }
+
+        .drop-cap::first-letter {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffd700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            margin-top: 4px;
+        }
+
+        .fancy-first::first-letter {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Marker Demos */
+        .marker-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .list-container h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .custom-ul li::marker {
+            content: "🚀 ";
+            font-size: 1.2em;
+        }
+
+        .custom-ol li::marker {
+            color: #ff6b6b;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Other Pseudo-Element Demos */
+        .other-pseudo-demo {
+            margin: 20px 0;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .custom-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4a5568;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 5px;
+            width: 250px;
+        }
+
+        .custom-input::placeholder {
+            color: #a0aec0;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .custom-input:focus {
+            border-color: #ffd700;
+            outline: none;
+        }
+
+        .selectable {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .selectable::selection {
+            background: #ffd700;
+            color: #2d3748;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Interactive CSS Pseudo-Classes Tutorial</h1>
+
+        <!-- Introduction -->
+        <div class="tutorial-section">
+            <h2 class="section-title">What are CSS Pseudo-Classes? 🤔</h2>
+            <p>Pseudo-classes are keywords added to selectors that specify a special state of the selected element. They let you style elements based on their position, state, or user interaction!</p>
+        </div>
+
+        <!-- Hover Example -->
+        <div class="tutorial-section">
+            <h2 class="section-title">1. :hover - When you mouse over an element</h2>
+            <div class="example">
+                <div class="hover-demo">
+                    Hover over me! 🐭
+                </div>
+                <div class="code">
+.hover-demo:hover {
+    background: #ff6b6b;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}</div>
+            </div>
+        </div>
+
+        <!-- nth-child Example -->
+        <div class="tutorial-section">
+            <h2 class="section-title">2. :nth-child() - Select specific children</h2>
+            <div class="example">
+                <p>Try hovering over the list items:</p>
+                <ul class="list-demo">
+                    <li>First item (odd)</li>
+                    <li>Second item (even)</li>
+                    <li>Third item (odd)</li>
+                    <li>Fourth item (even)</li>
+                    <li>Fifth item (odd)</li>
+                </ul>
+                <div class="code">
+li:nth-child(odd) { background: #ed8936; }
+li:nth-child(even) { background: #38b2ac; }
+li:hover { transform: translateX(10px); }</div>
+            </div>
+        </div>
+
+        <!-- First and Last Child -->
+        <div class="tutorial-section">
+            <h2 class="section-title">3. :first-child & :last-child</h2>
+            <div class="example">
+                <div class="first-last-demo">
+                    <p>I'm the first child! 🥇</p>
+                    <p>I'm a middle child</p>
+                    <p>I'm another middle child</p>
+                    <p>I'm the last child! 🏁</p>
+                </div>
+                <div class="code">
+p:first-child { background: #48bb78; }
+p:last-child { background: #f56565; }</div>
+            </div>
+        </div>
+
+        <!-- Focus Example -->
+        <div class="tutorial-section">
+            <h2 class="section-title">4. :focus - When an input is selected</h2>
+            <div class="example">
+                <div class="focus-demo">
+                    <p>Click on the input field below:</p>
+                    <input type="text" placeholder="Click me to see :focus in action!">
+                </div>
+                <div class="code">
+input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}</div>
+            </div>
+        </div>
+
+        <!-- Checked Example -->
+        <div class="tutorial-section">
+            <h2 class="section-title">5. :checked - For checked inputs</h2>
+            <div class="example">
+                <p>Check the boxes below:</p>
+                <div class="checkbox-demo">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cb1">
+                        <label for="cb1">HTML</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cb2">
+                        <label for="cb2">CSS</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cb3">
+                        <label for="cb3">JavaScript</label>
+                    </div>
+                </div>
+                <div class="code">
+input[type="checkbox"]:checked + label {
+    color: #ffd700;
+    font-weight: bold;
+    text-decoration: underline;
+}</div>
+            </div>
+        </div>
+
+        <!-- Interactive Quiz -->
+        <div class="tutorial-section quiz">
+            <h2 class="section-title">🧠 Quick Quiz Time!</h2>
+            
+            <div class="question">
+                <p><strong>Q1:</strong> Which pseudo-class would you use to style every other row in a table?</p>
+                <button class="try-button" onclick="toggleAnswer(1)">Show Answer</button>
+                <div id="answer1" class="answer">
+                    <strong>Answer:</strong> <code>:nth-child(even)</code> or <code>:nth-child(odd)</code>
+                    <br>This creates the "zebra stripe" effect commonly seen in tables!
+                </div>
+            </div>
+
+            <div class="question">
+                <p><strong>Q2:</strong> How do you select the first paragraph in a div?</p>
+                <button class="try-button" onclick="toggleAnswer(2)">Show Answer</button>
+                <div id="answer2" class="answer">
+                    <strong>Answer:</strong> <code>div p:first-child</code>
+                    <br>This selects the first paragraph that is a child of a div!
+                </div>
+            </div>
+
+            <div class="question">
+                <p><strong>Q3:</strong> What pseudo-class makes buttons interactive when users click them?</p>
+                <button class="try-button" onclick="toggleAnswer(3)">Show Answer</button>
+                <div id="answer3" class="answer">
+                    <strong>Answer:</strong> <code>:active</code>
+                    <br>This triggers when an element is being activated (like clicking a button)!
+                </div>
+            </div>
+
+            <div class="question">
+                <p><strong>Q4:</strong> What's the difference between <code>:is()</code> and <code>:where()</code>?</p>
+                <button class="try-button" onclick="toggleAnswer(4)">Show Answer</button>
+                <div id="answer4" class="answer">
+                    <strong>Answer:</strong> <code>:is()</code> has normal specificity, while <code>:where()</code> has zero specificity.
+                    <br>Use <code>:where()</code> for resets that won't interfere with other styles!
+                </div>
+            </div>
+
+            <div class="question">
+                <p><strong>Q5:</strong> How do you style a parent element based on its children?</p>
+                <button class="try-button" onclick="toggleAnswer(5)">Show Answer</button>
+                <div id="answer5" class="answer">
+                    <strong>Answer:</strong> Use <code>:has()</code> - the "parent selector"
+                    <br>Example: <code>article:has(img)</code> styles articles that contain images!
+                </div>
+            </div>
+
+            <div class="question">
+                <p><strong>Q6:</strong> What does <code>:nth-child(-n+3)</code> select?</p>
+                <button class="try-button" onclick="toggleAnswer(6)">Show Answer</button>
+                <div id="answer6" class="answer">
+                    <strong>Answer:</strong> The first 3 children only
+                    <br>The "-n+3" formula counts backwards from 3: 3, 2, 1!
+                </div>
+            </div>
+
+            <div class="question">
+                <p><strong>Q7:</strong> What's the correct order for link pseudo-classes?</p>
+                <button class="try-button" onclick="toggleAnswer(7)">Show Answer</button>
+                <div id="answer7" class="answer">
+                    <strong>Answer:</strong> LVHA - <code>:link</code>, <code>:visited</code>, <code>:hover</code>, <code>:active</code>
+                    <br>Remember "Love Hate" or "Lord Vader Hates Anakin"!
+                </div>
+            </div>
+
+            <div class="question">
+                <p><strong>Q8:</strong> How do you style content that appears when a URL fragment matches?</p>
+                <button class="try-button" onclick="toggleAnswer(8)">Show Answer</button>
+                <div id="answer8" class="answer">
+                    <strong>Answer:</strong> Use <code>:target</code>
+                    <br>Perfect for creating tab systems and smooth scroll highlights!
+                </div>
+            </div>
+        </div>
+
+        <!-- Playground -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🛝 Try It Yourself - CSS Playground</h2>
+            <p>Edit the CSS below and see the results instantly!</p>
+            
+            <div class="playground">
+                <div>
+                    <h3>CSS Editor</h3>
+                    <textarea id="cssEditor" oninput="updatePreview()">/* Experiment with all pseudo-classes! */
+.demo-box {
+    width: 80px;
+    height: 80px;
+    background: #3498db;
+    margin: 5px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border-radius: 5px;
+    position: relative;
+}
+
+/* Hover effects */
+.demo-box:hover {
+    background: #e74c3c;
+    transform: scale(1.2) rotate(10deg);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* nth-child patterns */
+.demo-box:nth-child(2n) {
+    background: #2ecc71;
+}
+
+.demo-box:nth-child(3n+1) {
+    border-radius: 50%;
+}
+
+/* First and last child */
+.demo-box:first-child {
+    background: gold;
+}
+
+.demo-box:last-child {
+    background: hotpink;
+}
+
+/* Use functional pseudo-classes */
+:is(.demo-box, .special):not(.excluded):hover {
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.3) rotate(15deg); }
+}
+
+/* Container styling when it has hovered children */
+.container:has(.demo-box:hover) {
+    background: linear-gradient(45deg, rgba(255,0,150,0.1), rgba(0,255,255,0.1));
+    border-radius: 10px;
+}
+</textarea>
+                </div>
+                
+                <div>
+                    <h3>Live Preview</h3>
+                    <iframe id="preview" class="result-frame"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Functional Pseudo-Classes Section -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🔧 Functional Pseudo-Classes - The Power Tools!</h2>
+            <p>These accept arguments and let you create complex selectors. They're like functions in programming!</p>
+        </div>
+
+        <!-- :is() Example -->
+        <div class="tutorial-section">
+            <h2 class="section-title">6. :is() - Group Similar Elements</h2>
+            <div class="example">
+                <p>Instead of writing long, repetitive selectors, use :is() to group them:</p>
+                <div class="is-demo">
+                    <button>Button Element</button>
+                    <a href="#" class="button">Link Button</a>
+                    <input type="submit" value="Submit Button" />
+                    <input type="reset" value="Reset Button" />
+                </div>
+                <div class="code">
+/* Instead of this long selector: */
+button, a.button, input[type='submit'], input[type='reset'] {
+    /* styles */
+}
+
+/* Use this clean :is() selector: */
+:is(button, a.button, input[type='submit'], input[type='reset']) {
+    background: darkblue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+:is(button, a.button, input[type='submit'], input[type='reset']):hover {
+    background: lightblue;
+}</div>
+            </div>
+        </div>
+
+        <!-- :where() Example -->
+        <div class="tutorial-section">
+            <h2 class="section-title">7. :where() - Zero Specificity Grouping</h2>
+            <div class="example">
+                <p>Like :is(), but with zero specificity - perfect for resets:</p>
+                <div class="where-demo">
+                    <h1>Main Title</h1>
+                    <h2>Subtitle</h2>
+                    <h3>Small Header</h3>
+                </div>
+                <div class="code">
+/* This won't interfere with other heading styles */
+:where(h1, h2, h3) {
+    margin: 0;
+    padding: 0;
+    color: #4a5568;
+}
+
+/* This specific style will still override the :where() rule */
+h1 {
+    color: #ffd700;
+    font-size: 2rem;
+}</div>
+            </div>
+        </div>
+
+        <!-- :has() Example -->
+        <div class="tutorial-section">
+            <h2 class="section-title">8. :has() - Parent Selector (CSS4)</h2>
+            <div class="example">
+                <p>Style parents based on their children - the "parent selector" we've always wanted!</p>
+                <div class="has-demo">
+                    <article>
+                        <h2>Article with H2</h2>
+                        <p>This article has an h2, so it gets special styling!</p>
+                    </article>
+                    <article>
+                        <h3>Article with H3</h3>
+                        <p>This article only has an h3, so different styling.</p>
+                    </article>
+                </div>
+                <div class="code">
+/* Style articles that contain an h2 */
+article:has(h2) {
+    border: 3px solid hotpink;
+    background: rgba(255, 20, 147, 0.1);
+}
+
+/* Style articles that DON'T have h2 */
+article:not(:has(h2)) {
+    border: 2px solid #4a5568;
+    background: rgba(74, 85, 104, 0.1);
+}</div>
+            </div>
+        </div>
+
+        <!-- :not() Example -->
+        <div class="tutorial-section">
+            <h2 class="section-title">9. :not() - Exclude Elements</h2>
+            <div class="example">
+                <p>Apply styles to everything EXCEPT specific elements:</p>
+                <div class="not-demo">
+                    <button class="primary">Primary Button</button>
+                    <button class="secondary">Secondary Button</button>
+                    <button class="danger">Danger Button</button>
+                    <button>Regular Button</button>
+                </div>
+                <div class="code">
+/* Style all buttons */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* Primary button gets special color */
+button.primary {
+    background: deepskyblue;
+    color: white;
+}
+
+/* All buttons EXCEPT primary get grey */
+button:not(.primary) {
+    background: grey;
+    color: white;
+}</div>
+            </div>
+        </div>
+
+        <!-- Advanced Functional Examples -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🚀 Advanced Functional Combinations</h2>
+            <div class="example">
+                <div class="advanced-demo">
+                    <div class="card">
+                        <h3>Card with Image</h3>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMTAwIDYwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjNEE1NTY4Ii8+Cjx0ZXh0IHg9IjUwIiB5PSIzNSIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiI+SW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=" alt="Demo image" />
+                        <p>This card has content</p>
+                    </div>
+                    <div class="card">
+                        <h3>Text Only Card</h3>
+                        <p>This card has no image</p>
+                    </div>
+                    <div class="card empty">
+                        <h3>Empty Card</h3>
+                    </div>
+                </div>
+                <div class="code">
+/* Cards with images get special styling */
+.card:has(img) {
+    border: 3px solid #48bb78;
+    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+}
+
+/* Cards without images or paragraphs */
+.card:not(:has(img)):not(:has(p)) {
+    opacity: 0.5;
+    border: 2px dashed #f56565;
+}
+
+/* Combine :is() and :not() */
+:is(h1, h2, h3):not(.special) {
+    color: #4a5568;
+}</div>
+            </div>
+        </div>
+
+        <!-- Form State Pseudo-classes -->
+        <div class="tutorial-section">
+            <h2 class="section-title">📝 Form State Pseudo-Classes</h2>
+            <div class="example">
+                <p>These pseudo-classes help you style forms based on their validation state and user interaction:</p>
+                <form class="form-demo">
+                    <div class="form-group">
+                        <label for="email">Email (required):</label>
+                        <input type="email" id="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age (18-99):</label>
+                        <input type="number" id="age" min="18" max="99" placeholder="Enter your age">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Website (optional):</label>
+                        <input type="url" id="website" placeholder="https://example.com">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to terms (required)</label>
+                    </div>
+                    <button type="submit" disabled>Submit Form</button>
+                </form>
+                <div class="code">
+/* Valid inputs get green border */
+input:valid {
+    border-color: #48bb78;
+    box-shadow: 0 0 5px rgba(72, 187, 120, 0.3);
+}
+
+/* Invalid inputs get red border */
+input:invalid {
+    border-color: #f56565;
+    box-shadow: 0 0 5px rgba(245, 101, 101, 0.3);
+}
+
+/* Required fields get special styling */
+input:required {
+    border-left: 4px solid #ffd700;
+}
+
+/* Disabled elements are dimmed */
+input:disabled, button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}</div>
+            </div>
+        </div>
+
+        <!-- Advanced nth Selectors -->
+        <div class="tutorial-section">
+            <h2 class="section-title">� Advanced nth-child Patterns</h2>
+            <div class="example">
+                <p>Master complex nth-child patterns with these interactive examples:</p>
+                <div class="nth-patterns">
+                    <div class="pattern-demo" data-pattern="2n">
+                        <h4>:nth-child(2n) - Every 2nd item</h4>
+                        <div class="items">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+                        </div>
+                    </div>
+                    <div class="pattern-demo" data-pattern="3n+1">
+                        <h4>:nth-child(3n+1) - Every 3rd starting from 1st</h4>
+                        <div class="items">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+                        </div>
+                    </div>
+                    <div class="pattern-demo" data-pattern="-n+3">
+                        <h4>:nth-child(-n+3) - First 3 items only</h4>
+                        <div class="items">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="code">
+/* Every 2nd item (even) */
+.items span:nth-child(2n) { background: #4299e1; }
+
+/* Every 3rd item starting from 1st (1, 4, 7...) */
+.items span:nth-child(3n+1) { background: #ed8936; }
+
+/* First 3 items only */
+.items span:nth-child(-n+3) { background: #48bb78; }
+
+/* Last 3 items */
+.items span:nth-last-child(-n+3) { border: 2px solid #f56565; }</div>
+            </div>
+        </div>
+
+        <!-- Structural Pseudo-classes -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🏗️ Structural Pseudo-Classes</h2>
+            <div class="example">
+                <div class="structural-demo">
+                    <div class="container-demo">
+                        <h3>Articles Section</h3>
+                        <article>First Article</article>
+                        <article>Second Article</article>
+                        <article>Third Article</article>
+                        <div>Not an article</div>
+                        <article>Last Article</article>
+                    </div>
+                    <div class="container-demo">
+                        <h3>Empty vs Content</h3>
+                        <div class="box"></div>
+                        <div class="box">Has content</div>
+                        <div class="box">   </div>
+                        <div class="box">More content here</div>
+                    </div>
+                </div>
+                <div class="code">
+/* First and last of type */
+article:first-of-type { background: #48bb78; }
+article:last-of-type { background: #f56565; }
+
+/* Only child styling */
+article:only-of-type { border: 3px solid #ffd700; }
+
+/* Empty elements */
+.box:empty { 
+    background: #4a5568; 
+    border: 2px dashed #cbd5e0;
+}
+
+/* Elements with content */
+.box:not(:empty) { 
+    background: #4299e1;
+    color: white;
+}</div>
+            </div>
+        </div>
+
+        <!-- Link States -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🔗 Link State Pseudo-Classes</h2>
+            <div class="example">
+                <p>Style links based on their interaction state (remember LVHA order!):</p>
+                <div class="link-demo">
+                    <a href="#section1" class="demo-link">Internal Link</a>
+                    <a href="https://example.com" target="_blank" class="demo-link">External Link</a>
+                    <a href="mailto:test@example.com" class="demo-link">Email Link</a>
+                    <a href="#visited-demo" class="demo-link visited-link">Previously Clicked</a>
+                </div>
+                <div class="code">
+/* Remember LVHA order! */
+a:link { color: #4299e1; }           /* Unvisited */
+a:visited { color: #805ad5; }        /* Visited */
+a:hover { color: #f56565; }          /* Hover */
+a:active { color: #ed8936; }         /* Active (clicking) */
+
+/* Focus for accessibility */
+a:focus { 
+    outline: 2px solid #ffd700;
+    outline-offset: 2px;
+}</div>
+            </div>
+        </div>
+
+        <!-- UI State Pseudo-classes -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🎛️ UI State Pseudo-Classes</h2>
+            <div class="example">
+                <div class="ui-demo">
+                    <div class="toggle-section">
+                        <input type="checkbox" id="toggle1">
+                        <label for="toggle1">Toggle Feature A</label>
+                        <div class="feature-content">Feature A is now active!</div>
+                    </div>
+                    <div class="toggle-section">
+                        <input type="radio" id="option1" name="options">
+                        <label for="option1">Option 1</label>
+                        <input type="radio" id="option2" name="options">
+                        <label for="option2">Option 2</label>
+                        <div class="radio-content">Selected option content appears here</div>
+                    </div>
+                    <div class="control-section">
+                        <button class="ui-btn" disabled>Disabled Button</button>
+                        <button class="ui-btn">Enabled Button</button>
+                        <input type="text" placeholder="Enabled input">
+                        <input type="text" placeholder="Disabled input" disabled>
+                    </div>
+                </div>
+                <div class="code">
+/* Checked state animations */
+input:checked + label {
+    background: #48bb78;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Show content when checked */
+input:checked ~ .feature-content {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+/* Indeterminate checkboxes */
+input:indeterminate {
+    background: linear-gradient(45deg, #ffd700, #ed8936);
+}
+
+/* Enabled vs disabled states */
+button:enabled:hover { transform: translateY(-2px); }
+input:disabled { background: #e2e8f0; }</div>
+            </div>
+        </div>
+
+        <!-- Target and Fragment Selectors -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🎯 Target Pseudo-Class</h2>
+            <div class="example">
+                <p>Click the links below to see :target in action:</p>
+                <div class="target-demo">
+                    <nav class="tab-nav">
+                        <a href="#tab1">Tab 1</a>
+                        <a href="#tab2">Tab 2</a>
+                        <a href="#tab3">Tab 3</a>
+                    </nav>
+                    <div id="tab1" class="tab-content">
+                        <h4>Tab 1 Content</h4>
+                        <p>This content is shown when Tab 1 is targeted in the URL!</p>
+                    </div>
+                    <div id="tab2" class="tab-content">
+                        <h4>Tab 2 Content</h4>
+                        <p>This content appears when Tab 2 is the target.</p>
+                    </div>
+                    <div id="tab3" class="tab-content">
+                        <h4>Tab 3 Content</h4>
+                        <p>Tab 3 content is displayed when this section is targeted.</p>
+                    </div>
+                </div>
+                <div class="code">
+/* Hide all tab content by default */
+.tab-content {
+    display: none;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* Show content when targeted */
+.tab-content:target {
+    display: block;
+    animation: fadeIn 0.5s ease;
+    border: 2px solid #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}</div>
+            </div>
+        </div>
+
+        <!-- Performance Tips -->
+        <div class="tutorial-section">
+            <h2 class="section-title">⚡ Performance & Best Practices</h2>
+            <div class="example">
+                <h4>🚀 Performance Tips:</h4>
+                <ul>
+                    <li><strong>Avoid complex :nth-child patterns</strong> on large lists</li>
+                    <li><strong>Use :where()</strong> for resets to avoid specificity wars</li>
+                    <li><strong>Prefer :is()</strong> over long selector lists</li>
+                    <li><strong>Test :has()</strong> browser support before using</li>
+                </ul>
+                
+                <h4>🎯 Best Practices:</h4>
+                <ul>
+                    <li><strong>LVHA Order:</strong> :link, :visited, :hover, :active</li>
+                    <li><strong>Always include :focus</strong> for accessibility</li>
+                    <li><strong>Use :not()</strong> sparingly - can impact performance</li>
+                    <li><strong>Combine pseudo-classes</strong> for powerful selections</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Browser Support Table -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🌐 Browser Support Reference</h2>
+            <div class="example">
+                <div class="support-table">
+                    <div class="support-row">
+                        <div class="pseudo-name">:hover, :focus, :active</div>
+                        <div class="support-status excellent">Excellent ✅</div>
+                        <div class="support-note">Universal support</div>
+                    </div>
+                    <div class="support-row">
+                        <div class="pseudo-name">:nth-child(), :not()</div>
+                        <div class="support-status excellent">Excellent ✅</div>
+                        <div class="support-note">CSS3 - well supported</div>
+                    </div>
+                    <div class="support-row">
+                        <div class="pseudo-name">:is(), :where()</div>
+                        <div class="support-status good">Good 🟡</div>
+                        <div class="support-note">Modern browsers (2020+)</div>
+                    </div>
+                    <div class="support-row">
+                        <div class="pseudo-name">:has()</div>
+                        <div class="support-status limited">Limited 🟠</div>
+                        <div class="support-note">Latest browsers (2022+)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Pseudo-classes Reference -->
+        <div class="tutorial-section">
+            <h2 class="section-title">📚 Complete Pseudo-Classes Reference</h2>
+            <div class="example">
+                <div class="reference-grid">
+                    <div class="ref-category">
+                        <h4>🖱️ User Actions</h4>
+                        <ul>
+                            <li><code>:hover</code> - Mouse over</li>
+                            <li><code>:active</code> - Being clicked</li>
+                            <li><code>:focus</code> - Keyboard/click focus</li>
+                            <li><code>:focus-within</code> - Contains focused element</li>
+                        </ul>
+                    </div>
+                    <div class="ref-category">
+                        <h4>🔗 Link States</h4>
+                        <ul>
+                            <li><code>:link</code> - Unvisited links</li>
+                            <li><code>:visited</code> - Visited links</li>
+                            <li><code>:target</code> - URL fragment target</li>
+                        </ul>
+                    </div>
+                    <div class="ref-category">
+                        <h4>📝 Form States</h4>
+                        <ul>
+                            <li><code>:checked</code> - Checked inputs</li>
+                            <li><code>:valid</code> - Valid form data</li>
+                            <li><code>:invalid</code> - Invalid form data</li>
+                            <li><code>:required</code> - Required fields</li>
+                            <li><code>:optional</code> - Optional fields</li>
+                            <li><code>:disabled</code> - Disabled elements</li>
+                            <li><code>:enabled</code> - Enabled elements</li>
+                        </ul>
+                    </div>
+                    <div class="ref-category">
+                        <h4>🏗️ Structural</h4>
+                        <ul>
+                            <li><code>:first-child</code> - First child</li>
+                            <li><code>:last-child</code> - Last child</li>
+                            <li><code>:nth-child(n)</code> - Nth child</li>
+                            <li><code>:only-child</code> - Only child</li>
+                            <li><code>:empty</code> - No content</li>
+                            <li><code>:root</code> - Document root</li>
+                        </ul>
+                    </div>
+                    <div class="ref-category">
+                        <h4>🔧 Functional</h4>
+                        <ul>
+                            <li><code>:is()</code> - Matches any</li>
+                            <li><code>:where()</code> - Zero specificity</li>
+                            <li><code>:has()</code> - Parent selector</li>
+                            <li><code>:not()</code> - Negation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pseudo-Elements Section -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🔷 CSS Pseudo-Elements (::)</h2>
+            <div class="example">
+                <p><strong>Pseudo-elements</strong> are virtual elements that don't match actual HTML but let you style specific parts of content or insert content. They use double colons <code>::</code> to distinguish from pseudo-classes.</p>
+                
+                <h3>::before and ::after</h3>
+                <div class="pseudo-element-demo">
+                    <button class="star-button">Learn More</button>
+                    <button class="arrow-button">Click Here</button>
+                    <button class="animated-button">Hover Me</button>
+                </div>
+                
+                <div class="code">
+/* Add content before element */
+.star-button::before {
+    content: "⭐ ";
+    color: gold;
+}
+
+/* Add content after element */
+.arrow-button::after {
+    content: " ➡️";
+    transition: transform 0.3s ease;
+}
+
+/* Animate pseudo-element on hover */
+.animated-button:hover::after {
+    transform: translateX(5px);
+}</div>
+            </div>
+        </div>
+
+        <!-- First Letter Styling -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🅰️ ::first-letter Pseudo-Element</h2>
+            <div class="example">
+                <div class="first-letter-demo">
+                    <p class="drop-cap">freeCodeCamp lets you learn to code without having to pay. This is an amazing resource for developers worldwide!</p>
+                    <p class="fancy-first">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+                </div>
+                
+                <div class="code">
+/* Create a drop cap effect */
+.drop-cap::first-letter {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffd700;
+    float: left;
+    line-height: 1;
+    margin-right: 8px;
+    margin-top: 4px;
+}
+
+/* Fancy first letter */
+.fancy-first::first-letter {
+    font-size: 2.5rem;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}</div>
+            </div>
+        </div>
+
+        <!-- List Markers -->
+        <div class="tutorial-section">
+            <h2 class="section-title">📋 ::marker Pseudo-Element</h2>
+            <div class="example">
+                <div class="marker-demo">
+                    <div class="list-container">
+                        <h4>Custom Unordered List</h4>
+                        <ul class="custom-ul">
+                            <li>Unordered list item 1</li>
+                            <li>Unordered list item 2</li>
+                            <li>Unordered list item 3</li>
+                            <li>Unordered list item 4</li>
+                        </ul>
+                    </div>
+                    <div class="list-container">
+                        <h4>Custom Ordered List</h4>
+                        <ol class="custom-ol">
+                            <li>Ordered list item 1</li>
+                            <li>Ordered list item 2</li>
+                            <li>Ordered list item 3</li>
+                            <li>Ordered list item 4</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="code">
+/* Style list markers */
+.custom-ul li::marker {
+    content: "🚀 ";
+    font-size: 1.2em;
+}
+
+.custom-ol li::marker {
+    color: #ff6b6b;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Advanced marker styling */
+.fancy-list li::marker {
+    content: "▶ ";
+    color: gold;
+}</div>
+            </div>
+        </div>
+
+        <!-- Other Pseudo-Elements -->
+        <div class="tutorial-section">
+            <h2 class="section-title">🔧 More Pseudo-Elements</h2>
+            <div class="example">
+                <div class="other-pseudo-demo">
+                    <div class="input-section">
+                        <input type="text" placeholder="Type something here..." class="custom-input">
+                        <input type="email" placeholder="Enter your email" class="custom-input">
+                    </div>
+                    <div class="selection-section">
+                        <p class="selectable">Try selecting this text to see custom selection styling!</p>
+                    </div>
+                </div>
+                
+                <div class="code">
+/* Style placeholder text */
+.custom-input::placeholder {
+    color: #a0aec0;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Custom text selection */
+.selectable::selection {
+    background: #ffd700;
+    color: #2d3748;
+}
+
+/* First line styling */
+.article::first-line {
+    font-weight: bold;
+    color: #4299e1;
+}</div>
+            </div>
+        </div>
+
+        <!-- Interactive Cheat Sheet -->
+        <div class="tutorial-section">
+            <h2 class="section-title">📋 Interactive Cheat Sheet</h2>
+            <div class="example">
+                <p>Click on any pseudo-class or pseudo-element to see it in action!</p>
+                <div class="cheat-sheet">
+                    <div class="cheat-item" onclick="showCheatExample('hover')">
+                        <code>:hover</code>
+                        <span>Mouse over effects</span>
+                    </div>
+                    <div class="cheat-item" onclick="showCheatExample('nth-child')">
+                        <code>:nth-child()</code>
+                        <span>Select by position</span>
+                    </div>
+                    <div class="cheat-item" onclick="showCheatExample('focus')">
+                        <code>:focus</code>
+                        <span>Input focus state</span>
+                    </div>
+                    <div class="cheat-item" onclick="showCheatExample('not')">
+                        <code>:not()</code>
+                        <span>Exclude elements</span>
+                    </div>
+                    <div class="cheat-item" onclick="showCheatExample('is')">
+                        <code>:is()</code>
+                        <span>Group selectors</span>
+                    </div>
+                    <div class="cheat-item" onclick="showCheatExample('has')">
+                        <code>:has()</code>
+                        <span>Parent selector</span>
+                    </div>
+                    <div class="cheat-item" onclick="showCheatExample('before-after')">
+                        <code>::before/::after</code>
+                        <span>Insert content</span>
+                    </div>
+                    <div class="cheat-item" onclick="showCheatExample('first-letter')">
+                        <code>::first-letter</code>
+                        <span>Style first letter</span>
+                    </div>
+                    <div class="cheat-item" onclick="showCheatExample('marker')">
+                        <code>::marker</code>
+                        <span>List markers</span>
+                    </div>
+                </div>
+                <div id="cheat-example" class="cheat-example">
+                    Click on a pseudo-class or pseudo-element above to see an example!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(questionNum) {
+            const answer = document.getElementById(`answer${questionNum}`);
+            answer.classList.toggle('show-answer');
+        }
+
+        function updatePreview() {
+            const css = document.getElementById('cssEditor').value;
+            const html = `
+                <html>
+                <head>
+                    <style>
+                        body { 
+                            margin: 20px; 
+                            font-family: Arial, sans-serif; 
+                            background: #2d3748; 
+                            color: white;
+                        }
+                        .container { 
+                            padding: 15px; 
+                            border: 2px solid #4a5568;
+                            border-radius: 10px;
+                            transition: all 0.3s ease;
+                        }
+                        ${css}
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="demo-box"></div>
+                        <div class="demo-box excluded"></div>
+                        <div class="demo-box"></div>
+                        <div class="demo-box"></div>
+                        <div class="demo-box"></div>
+                        <div class="demo-box"></div>
+                    </div>
+                    <p>Hover over the boxes to see effects!</p>
+                </body>
+                </html>
+            `;
+            
+            const preview = document.getElementById('preview');
+            preview.srcdoc = html;
+        }
+
+        // Initialize preview
+        updatePreview();
+
+        // Cheat sheet examples
+        function showCheatExample(type) {
+            const examples = {
+                'hover': `/* :hover - Mouse over effects */
+.button:hover {
+    background-color: #ff6b6b;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Works on any element */
+.card:hover {
+    border-color: gold;
+}`,
+                'nth-child': `/* :nth-child() - Select by position */
+li:nth-child(odd) { background: lightblue; }   /* 1st, 3rd, 5th... */
+li:nth-child(even) { background: lightcoral; } /* 2nd, 4th, 6th... */
+li:nth-child(3n+1) { color: gold; }            /* 1st, 4th, 7th... */
+li:nth-child(-n+3) { font-weight: bold; }      /* First 3 only */
+
+/* Also: :first-child, :last-child, :nth-last-child() */`,
+                'focus': `/* :focus - Input focus state */
+input:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 10px rgba(66, 153, 225, 0.5);
+    outline: none;
+}
+
+/* For accessibility - always include focus styles! */
+button:focus {
+    outline: 2px solid gold;
+    outline-offset: 2px;
+}`,
+                'not': `/* :not() - Exclude elements */
+button:not(.primary) {
+    background: grey;        /* All buttons except .primary */
+}
+
+p:not(.special) {
+    color: #666;            /* All paragraphs except .special */
+}
+
+/* Complex exclusions */
+input:not([type="submit"]):not([type="button"]) {
+    border: 1px solid #ccc; /* All inputs except submit/button */
+}`,
+                'is': `/* :is() - Group selectors (clean & efficient) */
+
+/* Instead of this long selector: */
+h1, h2, h3, h4, h5, h6 { margin-top: 0; }
+
+/* Use this clean version: */
+:is(h1, h2, h3, h4, h5, h6) { margin-top: 0; }
+
+/* With hover states: */
+:is(.btn, .button, input[type="button"]):hover {
+    transform: translateY(-2px);
+}`,
+                'has': `/* :has() - Parent selector (CSS4) */
+
+/* Style articles that contain images */
+article:has(img) {
+    border: 3px solid hotpink;
+    padding: 20px;
+}
+
+/* Style forms that have invalid inputs */
+form:has(input:invalid) {
+    border-color: red;
+}
+
+/* Cards without content */
+.card:not(:has(p, img)) {
+    opacity: 0.5;
+}`,
+                'before-after': `/* ::before and ::after - Insert content */
+
+/* Add star before button text */
+.star-button::before {
+    content: "⭐ ";
+    color: gold;
+}
+
+/* Add arrow after button */
+.cta-button::after {
+    content: " ➡️";
+    position: absolute;
+    right: 5px;
+    transition: transform 0.3s ease;
+}
+
+/* Animate on hover */
+.cta-button:hover::after {
+    transform: translateX(2px);
+}
+
+/* Decorative elements */
+.quote::before { content: """; }
+.quote::after { content: """; }`,
+                'first-letter': `/* ::first-letter - Style first letter */
+
+/* Drop cap effect */
+p::first-letter {
+    font-size: 4rem;
+    font-weight: bold;
+    color: gold;
+    float: left;
+    line-height: 1;
+    margin-right: 8px;
+}
+
+/* Fancy first letter */
+.article::first-letter {
+    font-size: 3rem;
+    color: crimson;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}`,
+                'marker': `/* ::marker - Style list markers */
+
+/* Custom bullet points */
+ul li::marker {
+    content: "🚀 ";
+    font-size: 1.2em;
+}
+
+/* Styled ordered list numbers */
+ol li::marker {
+    color: crimson;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Custom content markers */
+.checklist li::marker {
+    content: "✅ ";
+}
+
+/* Hide markers completely */
+.no-bullets li::marker {
+    content: "";
+}`
+            };
+
+            document.getElementById('cheat-example').textContent = examples[type] || 'Example not found.';
+        }
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click effects to buttons
+            const buttons = document.querySelectorAll('.try-button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 100);
+                });
+            });
+
+            // Auto-enable form submit button when form is valid
+            const form = document.querySelector('.form-demo');
+            const submitBtn = form?.querySelector('button[type="submit"]');
+            if (form && submitBtn) {
+                function checkFormValidity() {
+                    const isValid = form.checkValidity();
+                    submitBtn.disabled = !isValid;
+                    submitBtn.textContent = isValid ? 'Submit Form ✓' : 'Complete Form First';
+                }
+                
+                form.addEventListener('input', checkFormValidity);
+                form.addEventListener('change', checkFormValidity);
+            }
+
+            // Add smooth scrolling to target links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

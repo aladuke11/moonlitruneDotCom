@@ -1,0 +1,592 @@
+/* ============================================
+   PROJECTS PAGE STYLES
+   ============================================ */
+
+/* ============================================
+   SECTION: Page Layout
+   ============================================ */
+
+.project-carousel {
+    text-align: center;
+    margin: 2em 0;
+    animation: sectionFadeIn 1s ease-out;
+}
+
+.project-carousel h2 {
+    color: var(--color-primary);
+    text-shadow: 0 0 15px var(--color-primary);
+    margin-bottom: 1em;
+    animation: headerGlow 2.5s ease-in-out infinite alternate;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.project-carousel h2:not(.carousel-title) {
+    animation: headerGlow 2.5s ease-in-out infinite alternate;
+}
+
+.project-carousel:hover h2:not(.carousel-title) {
+    transform: translateY(-5px);
+}
+
+/* Carousel title styling - Override general h2 styles */
+.carousel-title {
+    font-size: 1.5em;
+    border: 2px solid var(--color-primary);
+    padding: 0.5em 1em;
+    border-radius: 8px; 
+    background: rgba(0, 0, 0, 0.85);
+    color: var(--color-primary);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.3),
+        inset 0 0 10px rgba(0, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto 1em auto;
+    width: fit-content;
+    display: block;
+    text-align: center;
+    animation: neon-glitch 6s ease-in-out infinite !important;
+    text-shadow: 
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 15px #00ffff;
+    position: relative;
+    z-index: 1;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   SECTION: Carousel Container
+   ============================================ */
+
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 1em auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    animation: carouselGlow 3s ease-in-out infinite alternate;
+}
+
+/* ============================================
+   SECTION: Carousel Items
+   ============================================ */
+
+.carousel-item {
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2em;
+    background: rgba(249, 249, 249, 0.1);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    color: var(--color-text);
+    backdrop-filter: blur(10px);
+    animation: itemFloat 4s ease-in-out infinite;
+    text-align: center;
+}
+
+.carousel-item.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideInFromRight 0.6s cubic-bezier(0.4, 0, 0.2, 1), itemFloat 4s ease-in-out infinite 0.6s;
+}
+
+/* Carousel item content styling */
+.carousel-item h3 {
+    color: var(--color-primary);
+    margin-bottom: 0.5em;
+    text-shadow: 0 0 10px var(--color-primary);
+    animation: titlePulse 2s ease-in-out infinite alternate;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    margin-top: 0.5em;
+}
+
+.carousel-item:hover h3 {
+    transform: translateY(-3px);
+}
+
+.carousel-item p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+    opacity: 0.9;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.carousel-item:hover p {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.carousel-item a {
+    color: var(--color-accent);
+    text-decoration: none;
+    padding: 0.8em 1.5em;
+    border: 2px solid var(--color-accent);
+    border-radius: 6px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0);
+}
+
+.carousel-item a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 133, 56, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.carousel-item a:hover::before {
+    left: 100%;
+}
+
+.carousel-item a:hover {
+    background: var(--color-accent);
+    color: var(--color-background);
+    box-shadow: 0 0 25px var(--color-accent), 0 5px 15px rgba(255, 133, 56, 0.3);
+    text-shadow: none;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* ============================================
+   SECTION: Navigation Buttons
+   ============================================ */
+
+.carousel-button {
+    margin: 0 0.8em;
+    padding: 0.8em 1.5em;
+    border: 2px solid var(--color-primary);
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--color-primary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 0 5px var(--color-primary);
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0);
+    animation: buttonBreathe 3s ease-in-out infinite;
+}
+
+.carousel-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.carousel-button:hover::before {
+    left: 100%;
+}
+
+.carousel-button:hover {
+    background: var(--color-primary);
+    color: var(--color-background);
+    box-shadow: 0 0 25px var(--color-primary), 0 5px 15px rgba(0, 255, 255, 0.3);
+    text-shadow: none;
+    transform: translateY(-3px) scale(1.05);
+    animation: none;
+}
+
+.carousel-button:active {
+    transform: translateY(-1px) scale(1.02);
+    transition: all 0.1s;
+}
+
+.carousel-button:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    animation: focusPulse 1s ease-in-out infinite alternate;
+}
+
+/* Navigation button icons */
+.carousel-button.prev::after {
+    content: '‹';
+    font-size: 1.2em;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.carousel-button.next::after {
+    content: '›';
+    font-size: 1.2em;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.carousel-button:hover::after {
+    transform: scale(1.3);
+    text-shadow: 0 0 15px currentColor;
+}
+
+/* ============================================
+   SECTION: Icons
+   ============================================ */
+
+/* Carousel project icons */
+.carousel-icon {
+    display: inline-block;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    text-shadow: 0 0 15px currentColor;
+    animation: iconFloat 3s ease-in-out infinite alternate;
+}
+
+/* Icon colors for different project types */
+.icon-webdev { color: var(--color-neon-cyan); }
+.icon-rpg { color: var(--color-neon-orange); }
+.icon-game { color: var(--color-neon-pink); }
+.icon-art { color: var(--color-neon-purple); }
+.icon-learning { color: var(--color-neon-green); }
+
+/* Hover effects for carousel icons */
+.carousel-item:hover .carousel-icon {
+    transform: scale(1.2) translateY(-5px);
+    animation: iconPulse 0.8s ease-in-out infinite;
+}
+
+/* Button icon styles */
+.button-icon {
+    font-size: 0.9em;
+    margin-right: 0.3em;
+    vertical-align: middle;
+}
+
+/* ============================================
+   SECTION: Animations & Keyframes
+   ============================================ */
+
+/* Page and section animations */
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes headerGlow {
+    from {
+        text-shadow: 0 0 15px var(--color-primary);
+        transform: scale(1);
+    }
+    to {
+        text-shadow: 0 0 25px var(--color-primary), 0 0 35px var(--color-neon-cyan);
+        transform: scale(1.02);
+    }
+}
+
+/* Carousel container animations */
+@keyframes carouselGlow {
+    from {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+    to {
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    }
+}
+
+/* Carousel item animations */
+@keyframes itemFloat {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px);
+    }
+    50% {
+        transform: translateY(-5px) translateX(0px);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes titlePulse {
+    from {
+        text-shadow: 0 0 10px var(--color-primary);
+    }
+    to {
+        text-shadow: 0 0 20px var(--color-primary), 0 0 30px var(--color-primary);
+    }
+}
+
+/* Button animations */
+@keyframes buttonBreathe {
+    0%, 100% {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+    50% {
+        border-color: var(--color-neon-cyan);
+        box-shadow: 0 0 20px rgba(0, 255, 247, 0.5);
+    }
+}
+
+@keyframes focusPulse {
+    from {
+        outline-color: var(--color-accent);
+    }
+    to {
+        outline-color: var(--color-neon-orange);
+    }
+}
+
+/* Icon animations */
+@keyframes iconFloat {
+    from {
+        transform: translateY(0px);
+        text-shadow: 0 0 15px currentColor;
+    }
+    to {
+        transform: translateY(-5px);
+        text-shadow: 0 0 25px currentColor, 0 0 35px currentColor;
+    }
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1.2) translateY(-5px);
+    }
+    50% {
+        transform: scale(1.4) translateY(-8px);
+    }
+}
+
+/* Neon glitch animation for titles - Subtle flickering neon sign */
+@keyframes neon-glitch {
+    0% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff;
+        opacity: 1;
+        filter: brightness(1);
+    }
+    5% {
+        text-shadow: 
+            0 0 3px #00ffff,
+            0 0 8px #00ffff,
+            0 0 12px #00ffff;
+        opacity: 0.85;
+        filter: brightness(0.9);
+    }
+    8% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff;
+        opacity: 1;
+        filter: brightness(1);
+    }
+    15% {
+        text-shadow: 
+            0 0 6px #00ffff,
+            0 0 12px #00ffff,
+            0 0 18px #00ffff;
+        opacity: 1;
+        filter: brightness(1.1);
+    }
+    22% {
+        text-shadow: 
+            0 0 4px #00ffff,
+            0 0 9px #00ffff,
+            0 0 14px #00ffff;
+        opacity: 0.9;
+        filter: brightness(0.95);
+    }
+    25% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff;
+        opacity: 1;
+        filter: brightness(1);
+    }
+    40% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff,
+            0 0 20px #00ffff;
+        opacity: 1;
+        filter: brightness(1.05);
+    }
+    50% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff;
+        opacity: 1;
+        filter: brightness(1);
+    }
+    65% {
+        text-shadow: 
+            0 0 4px #00ffff,
+            0 0 8px #00ffff,
+            0 0 13px #00ffff;
+        opacity: 0.88;
+        filter: brightness(0.92);
+    }
+    70% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff;
+        opacity: 1;
+        filter: brightness(1);
+    }
+    85% {
+        text-shadow: 
+            0 0 7px #00ffff,
+            0 0 14px #00ffff,
+            0 0 21px #00ffff;
+        opacity: 1;
+        filter: brightness(1.15);
+    }
+    90% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff;
+        opacity: 1;
+        filter: brightness(1);
+    }
+    100% {
+        text-shadow: 
+            0 0 5px #00ffff,
+            0 0 10px #00ffff,
+            0 0 15px #00ffff;
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+/* ============================================
+   SECTION: Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    .carousel {
+        max-width: 90%;
+    }
+    
+    .carousel-item {
+        padding: 1.5em;
+    }
+    
+    .carousel-button {
+        margin: 0 0.5em;
+        padding: 0.6em 1.2em;
+        font-size: 0.9em;
+    }
+    
+    .carousel-icon {
+        font-size: 1.5em;
+    }
+    
+    .project-carousel h2 {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-item {
+        padding: 1em;
+    }
+    
+    .carousel-button {
+        padding: 0.5em 1em;
+        font-size: 0.8em;
+        margin: 0 0.3em;
+    }
+    
+    .carousel-icon {
+        font-size: 1.3em;
+    }
+}
+
+/* ============================================
+   SECTION: Accessibility
+   ============================================ */
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-item,
+    .carousel-button,
+    .project-carousel h2,
+    .carousel-item h3,
+    .carousel-item p,
+    .carousel-item a,
+    .carousel,
+    .carousel-icon {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .carousel-item.active {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+    
+    .carousel-button::before,
+    .carousel-item a::before {
+        display: none;
+    }
+    
+    .carousel-item:hover .carousel-icon {
+        transform: none !important;
+        animation: none !important;
+    }
+    
+    .carousel-button::after {
+        transition: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .carousel-item {
+        border: 2px solid;
+        background: var(--color-background);
+    }
+    
+    .carousel-button {
+        border-width: 3px;
+    }
+}
+
+/* Remove the duplicate carousel-title rule */
+
+/* Focus styles for keyboard navigation */
+.carousel-item:focus-within {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}

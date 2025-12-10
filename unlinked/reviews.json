@@ -1,0 +1,57 @@
+{
+    "_guide": {
+        "_comment": "HOW TO ADD A NEW REVIEW",
+        "_instructions": [
+            "1. Copy the template below and paste it into the 'reviews' array",
+            "2. Replace all placeholder text with your actual review content",
+            "3. Make sure to add a comma after the previous review entry",
+            "4. Keep the JSON syntax valid - use double quotes for strings",
+            "5. Rating should be a number from 1-5 (no quotes around numbers)",
+            "6. Text should be 2-3 paragraphs for good article-style formatting",
+            "7. Add game images to the 'images/' folder and reference them in the 'image' field",
+            "8. Image field is optional - leave it out if you don't have an image"
+        ],
+        "_template": {
+            "name": "Game Title Here",
+            "text": "Your detailed review goes here. Write 2-3 paragraphs about the gameplay, graphics, story, and overall experience. Be descriptive and share your honest thoughts. This text will be displayed with a large first letter and justified alignment, so make it substantial enough to look good in the article format.",
+            "rating": 4,
+            "genre": "Game Genre (e.g., Action RPG, Platformer, etc.)",
+            "developer": "Developer/Studio Name",
+            "image": "images/game-screenshot.jpg"
+        },
+        "_notes": [
+            "The 'name' field becomes the article headline",
+            "The 'text' field should be substantial - aim for 300-500 words",
+            "The 'rating' field generates star displays (1-5 stars)",
+            "The 'genre' field creates a colored badge",
+            "The 'developer' field shows attribution with 'by' prefix",
+            "The 'image' field is optional - shows game screenshot/artwork alongside review",
+            "Images should be placed in the 'images/' folder (jpg, png, webp formats work best)",
+            "Recommended image size: 400x300px or similar 4:3 aspect ratio"
+        ]
+    },
+    "reviews": [
+        {
+            "name": "Hades",
+            "text": "Supergiant Games has created something truly special with Hades. This isn't just another roguelike - it's a masterclass in how narrative and gameplay can work together seamlessly. Every death in Hades feels meaningful because it advances the story, introduces new dialogue, or unlocks new abilities. The combat is incredibly satisfying, with each weapon feeling distinct and powerful. Zagreus moves with fluid precision, and the enemy variety keeps encounters fresh throughout dozens of runs. What really sets Hades apart is its characters. The voice acting is phenomenal, and every interaction feels genuine. Even after 100+ hours, I'm still discovering new dialogue and story beats. The art style is gorgeous, with vibrant colors that pop against the underworld setting. If you're going to play one roguelike, make it this one.",
+            "rating": 5,
+            "genre": "Action RPG",
+            "developer": "Supergiant Games",
+            "image": "images/8adfe9eb-0b2c-433d-9c08-f97a0f494f1a.png"
+        },
+        {
+            "name": "Dead Cells",
+            "text": "Dead Cells proves that the metroidvania-roguelike hybrid can work brilliantly when executed properly. Motion Twin has crafted a game that feels both familiar and fresh. The combat system is the real star here - every weapon has weight and impact, from lightning-fast daggers to massive two-handed swords. The movement mechanics are incredibly tight, allowing for precise platforming that never feels unfair. What impressed me most is how the game handles progression. While each run starts fresh, the permanent upgrades and unlocks create a genuine sense of advancement. The pixel art is stunning, with smooth animations that make every action feel responsive. The difficulty curve is perfectly balanced - challenging enough to keep you engaged but never so punishing that you want to quit. Dead Cells respects your time while still demanding skill and patience.",
+            "rating": 4,
+            "genre": "Metroidvania",
+            "developer": "Motion Twin"
+        },
+        {
+            "name": "The Binding of Isaac: Repentance",
+            "text": "Edmund McMillen's twisted masterpiece reaches its ultimate form with Repentance. This final expansion pack adds so much content that it practically doubles the game's size. The Binding of Isaac has always been about discovery and experimentation, and Repentance pushes that concept to its absolute limit. With over 700 items now in the game, the possible synergies are almost infinite. I've been playing Isaac for years, and I'm still finding new combinations that completely change how the game feels. The art style remains intentionally grotesque and disturbing, which isn't for everyone, but it perfectly matches the dark themes the game explores. What makes Isaac special is how every run tells a different story through gameplay. One run you might become an unstoppable laser-shooting machine, the next you're a tiny character who splits into multiple copies. It's chaotic, weird, and absolutely brilliant.",
+            "rating": 5,
+            "genre": "Twin-dick Shooter",
+            "developer": "Edmund McMillen"
+        }
+    ]
+}
