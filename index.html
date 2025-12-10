@@ -26,6 +26,7 @@
         <div class="debt-progress">
             <div id="debtFill" class="debt-fill"></div>
         </div>
+        <button id="resetBtn" class="debt-bar-reset">Reset</button>
     </div>
 
     <main>
@@ -129,8 +130,25 @@
             }
         }
         
+        // Reset button handler
+        function resetGame() {
+            if (confirm('Are you sure you want to reset all progress? This will clear all debt, purchases, and unlocks.')) {
+                localStorage.removeItem('cryptoCorp_debt');
+                localStorage.removeItem('cryptoCorp_purchases');
+                localStorage.removeItem('cryptoCorp_gogglesUnlocked');
+                updateDebtBar();
+                alert('Game reset complete!');
+            }
+        }
+        
         // Update debt bar on page load
-        window.addEventListener('load', updateDebtBar);
+        window.addEventListener('load', function() {
+            updateDebtBar();
+            const resetBtn = document.getElementById('resetBtn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', resetGame);
+            }
+        });
         
         // Listen for storage changes (when another tab updates debt)
         window.addEventListener('storage', updateDebtBar);
