@@ -54,10 +54,66 @@
                     <span class="productPrice">$129.99</span>
                     <button class="buyButton">Buy Now</button>
                 </div>
+        
         </section>
+        <div class="full-screen-popup">
+            <div class="popup-content">
+                <span class="close-popup">&times;</span>
+                <h2>Credits Low</h2>
+                <p>Your account lacks credits. Would you like to borrow some more?</p>
+                <p class="disclamer">Warning failure to pay will result in account suspension. Agreeing to this nulls your rights to defend yourself In the event Crypto corp hunts you down.</p>
+                <button class="confirm-button">Agree</button>
+                <button class="cancel-button">Cancel</button>
+        </div>
     
         
     </main>
     <footer>
         <p>&copy; 2024 Cyberpunk Store</p>
     </footer>
+    
+    <script>
+        // Popup functionality
+        const popup = document.querySelector('.full-screen-popup');
+        const closeBtn = document.querySelector('.close-popup');
+        const confirmBtn = document.querySelector('.confirm-button');
+        const cancelBtn = document.querySelector('.cancel-button');
+
+        // Close popup function
+        function closePopup() {
+            popup.classList.remove('active');
+        }
+
+        // Open popup function
+        function openPopup() {
+            popup.classList.add('active');
+        }
+
+        // Event listeners
+        closeBtn.addEventListener('click', closePopup);
+        cancelBtn.addEventListener('click', closePopup);
+        
+        confirmBtn.addEventListener('click', function() {
+            alert('Credits borrowed successfully! Your debt has been recorded.');
+            closePopup();
+        });
+
+        // Close popup when clicking outside of it
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
+
+        // Optional: Open popup on page load (comment out if not needed)
+        // window.addEventListener('load', openPopup);
+
+        // Optional: Add keyboard support (ESC to close)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && popup.classList.contains('active')) {
+                closePopup();
+            }
+        });
+    </script>
+</body>
+</html>

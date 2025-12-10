@@ -271,6 +271,140 @@
     .productGrid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Popup/Modal Styles */
+.full-screen-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.full-screen-popup.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.popup-content {
+    background-color: var(--cyber-bg);
+    border: 2px solid var(--cyber-button-bg);
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 
+        0 0 20px rgba(255, 0, 102, 0.4),
+        inset 0 0 20px rgba(255, 0, 102, 0.1);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.popup-content h2 {
+    color: var(--cyber-button-bg);
+    text-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.popup-content p {
+    color: var(--cyber-text);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.popup-content .disclamer {
+    color: var(--cyber-alert-warning-bg);
+    font-size: 0.9em;
+    border-left: 3px solid var(--cyber-alert-warning-bg);
+    padding-left: 15px;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2em;
+    color: var(--cyber-button-bg);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-popup:hover {
+    color: var(--cyber-accent);
+    text-shadow: 0 0 10px rgba(0, 255, 153, 0.6);
+    transform: scale(1.2) rotate(90deg);
+}
+
+.popup-content button {
+    background-color: var(--cyber-button-bg);
+    color: white;
+    border: 2px solid var(--cyber-button-bg);
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.popup-content button:hover {
+    background-color: var(--cyber-button-bg-hover);
+    box-shadow: 0 0 15px rgba(255, 0, 102, 0.6);
+}
+
+.popup-content button:last-child {
+    background-color: transparent;
+    border-color: var(--cyber-accent);
+    color: var(--cyber-accent);
+}
+
+.popup-content button:last-child:hover {
+    background-color: var(--cyber-accent);
+    color: var(--cyber-bg);
+    box-shadow: 0 0 15px rgba(0, 255, 153, 0.6);
 }   
 /* ============================================
    MEDIA QUERIES
