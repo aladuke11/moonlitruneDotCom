@@ -56,6 +56,21 @@
                 </div>
         
         </section>
+        <div id="hiddenBox" class="hidden-box" style="display: none;">
+            <div class="hidden-content">
+                <h2>⚠️ WARNING ⚠️</h2>
+                <p>By equipping the HoloVision Goggles, you have gained access to restricted systems.</p>
+                <div class="holo-message">
+                    <p><strong>ENCRYPTED TRANSMISSION DETECTED</strong></p>
+                    <p>Your augmented reality layer has detected an anomalous signal in the cybernetic fabric of the city.</p>
+                    <p>Unknown faction attempting contact...</p>
+                    <p style="color: var(--color-neon-green); text-shadow: 0 0 10px var(--color-neon-green); margin-top: 20px;">
+                        "Welcome, operative. Your credentials have been verified. The goggles you now wear grant you access to classified information. The network awaits your next move..."
+                    </p>
+                </div>
+                <button id="closeHidden" class="close-hidden-btn">Close Access</button>
+            </div>
+        </div>
         <div class="full-screen-popup">
             <div class="popup-content">
                 <span class="close-popup">&times;</span>
@@ -144,6 +159,13 @@
             if (currentItem) {
                 savePurchase(currentItem.name, currentItem.price);
                 alert(`Purchase recorded!\nItem: ${currentItem.name}\nPrice: $${currentItem.price}\n\nTotal Debt: $${debt.toFixed(2)}`);
+                
+                // Check if goggles were just purchased
+                if (currentItem.name.includes('HoloVision Goggles')) {
+                    setTimeout(() => {
+                        showHiddenBox();
+                    }, 500);
+                }
             } else {
                 alert(`Credits borrowed successfully! Your debt has been recorded.\n\nTotal Debt: $${debt.toFixed(2)}`);
             }
@@ -168,6 +190,32 @@
             }
         });
 
+        // Hidden box functionality
+        const hiddenBox = document.getElementById('hiddenBox');
+        const closeHiddenBtn = document.getElementById('closeHidden');
+
+        function showHiddenBox() {
+            hiddenBox.style.display = 'flex';
+            localStorage.setItem('goggles_purchased', 'true');
+        }
+
+        function hideHiddenBox() {
+            hiddenBox.style.display = 'none';
+        }
+
+        closeHiddenBtn.addEventListener('click', hideHiddenBox);
+        hiddenBox.addEventListener('click', function(e) {
+            if (e.target === hiddenBox) {
+                hideHiddenBox();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && hiddenBox.style.display === 'flex') {
+                hideHiddenBox();
+            }
+        });
+
         // Check for existing debt and unlock status on page load
         window.addEventListener('load', function() {
             const debt = getDebt();
@@ -180,6 +228,11 @@
                 console.log(`📦 Purchase History (${purchases.length} items):`);
                 purchases.forEach((purchase, index) => {
                     console.log(`  ${index + 1}. ${purchase.name} - $${purchase.price} (${purchase.date})`);
+                    
+                    // Check if goggles were previously purchased
+                    if (purchase.name.includes('HoloVision Goggles') && localStorage.getItem('goggles_purchased') === 'true') {
+                        // Don't auto-show on reload - user can interact to view
+                    }
                 });
             }
 
@@ -206,6 +259,28 @@
                     }
                     console.log('🔓 HoloVision Goggles unlocked!');
                 }
+            }
+
+            // Show hidden box if goggles were previously purchased
+            const gogglesPurchased = localStorage.getItem('goggles_purchased') === 'true';
+            if (gogglesPurchased && purchases.some(p => p.name.includes('HoloVision Goggles'))) {
+                const banner = document.createElement('div');
+                banner.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--color-neon-green);
+                    color: var(--color-background);
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    z-index: 999;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 0 10px var(--color-neon-green);
+                `;
+                banner.textContent = '👁️ Click to access hidden content';
+                banner.addEventListener('click', showHiddenBox);
+                document.body.appendChild(banner);
             }
         });
 

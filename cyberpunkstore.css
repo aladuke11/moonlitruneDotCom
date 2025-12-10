@@ -467,5 +467,102 @@
 }   
 }   
 
+/* Hidden box styles */
+.hidden-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 18, 18, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.5s ease;
+    backdrop-filter: blur(5px);
+}
+
+.hidden-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 3px solid var(--cyber-accent);
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 
+        0 0 20px var(--cyber-accent),
+        0 0 40px rgba(0, 255, 153, 0.2),
+        inset 0 0 20px rgba(0, 255, 153, 0.05);
+    animation: slideIn 0.6s ease;
+    position: relative;
+}
+
+.hidden-content h2 {
+    color: var(--cyber-accent);
+    text-shadow: 0 0 10px var(--cyber-accent);
+    font-size: 2rem;
+    margin-top: 0;
+    text-align: center;
+    animation: neon-flicker 3s infinite alternate;
+}
+
+.hidden-content p {
+    color: var(--cyber-text);
+    line-height: 1.8;
+    margin: 15px 0;
+    font-size: 1.1rem;
+}
+
+.holo-message {
+    background: rgba(0, 255, 153, 0.05);
+    border-left: 4px solid var(--cyber-accent);
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: inset 0 0 10px rgba(0, 255, 153, 0.1);
+}
+
+.holo-message p {
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.close-hidden-btn {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 30px;
+    background: var(--cyber-button-bg);
+    color: #fff;
+    border: 2px solid var(--cyber-button-bg);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 102, 0.4);
+}
+
+.close-hidden-btn:hover {
+    background: var(--cyber-button-bg-hover);
+    border-color: var(--cyber-button-bg-hover);
+    box-shadow: 0 0 20px rgba(255, 0, 102, 0.6);
+    transform: translateY(-2px);
+}
+
+.close-hidden-btn:active {
+    transform: translateY(0);
+}
+
+/* Animations */
+@keyframes neon-flicker {
+    0%, 100% {
+        text-shadow: 0 0 10px var(--cyber-accent);
+    }
+    50% {
+        text-shadow: 0 0 20px var(--cyber-accent), 0 0 30px rgba(0, 255, 153, 0.5);
+    }
+}
 
 /* End of cyberpunkstore.css */
