@@ -20,6 +20,7 @@
     </header>
     <div id="debt-reminder" class="debt-warning" style="display: none;">
         <strong>⚠️ NOTICE:</strong> You have an outstanding debt with CryptoCorp. Visit the <a href="CyberpunkStore.html">Cyberpunk Store</a> to check your account status.
+        <button id="accessHololens" class="debt-reminder-button" style="display: none;">🔧 HoloLens Access</button>
     </div>
     <main>
         <section class="page-intro">
@@ -95,6 +96,24 @@
             </article>
         </section>
     </main>
+    <div id="hololensBox" class="hololens-box" style="display: none;">
+        <div class="hololens-content">
+            <div class="hololens-header">
+                <span class="close-hololens">&times;</span>
+                <h2>HoloLens System Interface</h2>
+            </div>
+            <div class="hololens-body">
+                <p><strong>[SYSTEM ALERT]</strong></p>
+                <p>Emergency debt clearance protocol initiated.</p>
+                <p>CryptoCorp debt liability: <span id="debt-display">$0.00</span></p>
+                <p style="color: var(--color-neon-green); margin-top: 20px;">
+                    <strong>Warning:</strong> Clearing debt will void all transaction records. This action cannot be undone.
+                </p>
+                <button id="clearDebtBtn" class="hololens-button">Clear Debt & Wipe Records</button>
+                <button id="cancelDebtBtn" class="hololens-button cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
     <footer>
         <p>&copy; 2023 MoonlitRune's Place</p>
         <p>Background image from <a href="https://www.vecteezy.com">www.Vecteezy.com</a></p>
@@ -105,6 +124,55 @@
         const DEBT_KEY = 'cryptoCorp_debt';
         const PURCHASES_KEY = 'cryptoCorp_purchases';
         const debtReminder = document.getElementById('debt-reminder');
+        const hololensBox = document.getElementById('hololensBox');
+        const accessHololensBtn = document.getElementById('accessHololens');
+        const closeHololensBtn = document.querySelector('.close-hololens');
+        const clearDebtBtn = document.getElementById('clearDebtBtn');
+        const cancelDebtBtn = document.getElementById('cancelDebtBtn');
+        const debtDisplay = document.getElementById('debt-display');
+
+        // HoloLens box functions
+        function showHololensBox() {
+            const debt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
+            debtDisplay.textContent = `$${debt.toFixed(2)}`;
+            hololensBox.style.display = 'flex';
+        }
+
+        function hideHololensBox() {
+            hololensBox.style.display = 'none';
+        }
+
+        function clearDebt() {
+            if (confirm('Are you absolutely sure? This will permanently clear all debt and purchase records.')) {
+                localStorage.removeItem(DEBT_KEY);
+                localStorage.removeItem(PURCHASES_KEY);
+                localStorage.removeItem('goggles_purchased');
+                alert('All records wiped. CryptoCorp debt cleared.');
+                hideHololensBox();
+                debtReminder.style.display = 'none';
+                location.reload(); // Refresh to update all pages
+            }
+        }
+
+        // Event listeners
+        accessHololensBtn.addEventListener('click', showHololensBox);
+        closeHololensBtn.addEventListener('click', hideHololensBox);
+        clearDebtBtn.addEventListener('click', clearDebt);
+        cancelDebtBtn.addEventListener('click', hideHololensBox);
+
+        // Click outside to close
+        hololensBox.addEventListener('click', function(e) {
+            if (e.target === hololensBox) {
+                hideHololensBox();
+            }
+        });
+
+        // ESC key to close
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && hololensBox.style.display === 'flex') {
+                hideHololensBox();
+            }
+        });
         
         window.addEventListener('load', function() {
             const debt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
@@ -121,6 +189,7 @@
                 
                 debtReminder.style.display = 'block';
                 debtReminder.innerHTML = debtMessage;
+                accessHololensBtn.style.display = 'inline-block';
             }
             
             // Log purchase history to console for debugging
