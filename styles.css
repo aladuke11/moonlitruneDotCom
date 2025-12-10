@@ -272,8 +272,8 @@ nav a:hover {
     text-shadow: 0 0 8px rgba(255, 170, 0, 0.6);
 }
 
-/* HoloLens box styles */
-.hololens-box {
+/* HoloVision box styles */
+.holovision-box {
     position: fixed;
     top: 0;
     left: 0;
@@ -288,7 +288,7 @@ nav a:hover {
     backdrop-filter: blur(8px);
 }
 
-.hololens-content {
+.holovision-content {
     background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 100%);
     border: 3px solid var(--color-neon-cyan);
     border-radius: 8px;
@@ -305,7 +305,7 @@ nav a:hover {
     border-left: 6px solid var(--color-neon-cyan);
 }
 
-.hololens-header {
+.holovision-header {
     background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, rgba(0, 100, 150, 0.1) 100%);
     padding: 20px;
     border-bottom: 2px solid var(--color-neon-cyan);
@@ -315,7 +315,7 @@ nav a:hover {
     align-items: center;
 }
 
-.hololens-header h2 {
+.holovision-header h2 {
     color: var(--color-neon-cyan);
     text-shadow: 0 0 10px var(--color-neon-cyan);
     margin: 0;
@@ -323,7 +323,7 @@ nav a:hover {
     flex: 1;
 }
 
-.close-hololens {
+.close-holovision {
     color: var(--color-neon-cyan);
     font-size: 2rem;
     cursor: pointer;
@@ -337,26 +337,26 @@ nav a:hover {
     background: rgba(0, 255, 255, 0.05);
 }
 
-.close-hololens:hover {
+.close-holovision:hover {
     background: rgba(0, 255, 255, 0.15);
     text-shadow: 0 0 10px var(--color-neon-cyan);
     transform: scale(1.1);
 }
 
-.hololens-body {
+.holovision-body {
     padding: 25px;
     color: var(--color-text);
     font-family: 'Courier New', monospace;
     line-height: 1.8;
 }
 
-.hololens-body p {
+.holovision-body p {
     margin: 12px 0;
     color: var(--color-neon-cyan);
     text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
 }
 
-.hololens-button {
+.holovision-button {
     display: block;
     width: 100%;
     padding: 12px 20px;
@@ -372,24 +372,24 @@ nav a:hover {
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
-.hololens-button:hover:not(.cancel) {
+.holovision-button:hover:not(.cancel) {
     background: linear-gradient(135deg, #00ffff 0%, #00dddd 100%);
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.3);
     transform: translateY(-2px);
 }
 
-.hololens-button:active:not(.cancel) {
+.holovision-button:active:not(.cancel) {
     transform: translateY(0);
 }
 
-.hololens-button.cancel {
+.holovision-button.cancel {
     background: linear-gradient(135deg, var(--color-surface) 0%, #444 100%);
     color: var(--color-text);
     border-color: var(--color-border);
     box-shadow: 0 0 5px rgba(144, 187, 253, 0.2);
 }
 
-.hololens-button.cancel:hover {
+.holovision-button.cancel:hover {
     background: linear-gradient(135deg, #555 0%, #666 100%);
     box-shadow: 0 0 10px rgba(144, 187, 253, 0.4);
 }

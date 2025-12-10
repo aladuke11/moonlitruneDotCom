@@ -96,21 +96,21 @@
             </article>
         </section>
     </main>
-    <div id="hololensBox" class="hololens-box" style="display: none;">
-        <div class="hololens-content">
-            <div class="hololens-header">
-                <span class="close-hololens">&times;</span>
-                <h2>HoloLens System Interface</h2>
+    <div id="holovisionBox" class="holovision-box" style="display: none;">
+        <div class="holovision-content">
+            <div class="holovision-header">
+                <span class="close-holovision">&times;</span>
+                <h2>HoloVision System Interface</h2>
             </div>
-            <div class="hololens-body">
-                <p><strong>[SYSTEM ALERT]</strong></p>
-                <p>Emergency debt clearance protocol initiated.</p>
-                <p>CryptoCorp debt liability: <span id="debt-display">$0.00</span></p>
+            <div class="holovision-body">
+                <p><strong>[AUGMENTED REALITY PROTOCOL]</strong></p>
+                <p>HoloVision emergency debt clearance sequence initialized.</p>
+                <p>Current CryptoCorp liability: <span id="debt-display">$0.00</span></p>
                 <p style="color: var(--color-neon-green); margin-top: 20px;">
-                    <strong>Warning:</strong> Clearing debt will void all transaction records. This action cannot be undone.
+                    <strong>⚠️ WARNING:</strong> Clearing debt through HoloVision will permanently erase all transaction records from your account.
                 </p>
-                <button id="clearDebtBtn" class="hololens-button">Clear Debt & Wipe Records</button>
-                <button id="cancelDebtBtn" class="hololens-button cancel">Cancel</button>
+                <button id="clearDebtBtn" class="holovision-button">Execute Debt Clearance</button>
+                <button id="cancelDebtBtn" class="holovision-button cancel">Abort Protocol</button>
             </div>
         </div>
     </div>
@@ -124,22 +124,22 @@
         const DEBT_KEY = 'cryptoCorp_debt';
         const PURCHASES_KEY = 'cryptoCorp_purchases';
         const debtReminder = document.getElementById('debt-reminder');
-        const hololensBox = document.getElementById('hololensBox');
-        const accessHololensBtn = document.getElementById('accessHololens');
-        const closeHololensBtn = document.querySelector('.close-hololens');
+        const holovisionBox = document.getElementById('holovisionBox');
+        const accessHolovisionBtn = document.getElementById('accessHololens');
+        const closeHolovisionBtn = document.querySelector('.close-holovision');
         const clearDebtBtn = document.getElementById('clearDebtBtn');
         const cancelDebtBtn = document.getElementById('cancelDebtBtn');
         const debtDisplay = document.getElementById('debt-display');
 
-        // HoloLens box functions
-        function showHololensBox() {
+        // HoloVision box functions
+        function showHolovisionBox() {
             const debt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
             debtDisplay.textContent = `$${debt.toFixed(2)}`;
-            hololensBox.style.display = 'flex';
+            holovisionBox.style.display = 'flex';
         }
 
-        function hideHololensBox() {
-            hololensBox.style.display = 'none';
+        function hideHolovisionBox() {
+            holovisionBox.style.display = 'none';
         }
 
         function clearDebt() {
@@ -148,29 +148,29 @@
                 localStorage.removeItem(PURCHASES_KEY);
                 localStorage.removeItem('goggles_purchased');
                 alert('All records wiped. CryptoCorp debt cleared.');
-                hideHololensBox();
+                hideHolovisionBox();
                 debtReminder.style.display = 'none';
                 location.reload(); // Refresh to update all pages
             }
         }
 
         // Event listeners
-        accessHololensBtn.addEventListener('click', showHololensBox);
-        closeHololensBtn.addEventListener('click', hideHololensBox);
+        accessHolovisionBtn.addEventListener('click', showHolovisionBox);
+        closeHolovisionBtn.addEventListener('click', hideHolovisionBox);
         clearDebtBtn.addEventListener('click', clearDebt);
-        cancelDebtBtn.addEventListener('click', hideHololensBox);
+        cancelDebtBtn.addEventListener('click', hideHolovisionBox);
 
         // Click outside to close
-        hololensBox.addEventListener('click', function(e) {
-            if (e.target === hololensBox) {
-                hideHololensBox();
+        holovisionBox.addEventListener('click', function(e) {
+            if (e.target === holovisionBox) {
+                hideHolovisionBox();
             }
         });
 
         // ESC key to close
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && hololensBox.style.display === 'flex') {
-                hideHololensBox();
+            if (e.key === 'Escape' && holovisionBox.style.display === 'flex') {
+                hideHolovisionBox();
             }
         });
         
