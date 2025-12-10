@@ -32,6 +32,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+    /* Performance optimization */
+    contain: layout;
 }
 
 .productCard {
@@ -42,6 +44,10 @@
     text-align: center;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(0, 255, 153, 0.2);
+    /* Performance: Use will-change and reduce animations off-screen */
+    will-change: transform;
+    contain: layout style paint;
+    /* Neon flicker animation only on hover/visible */
 }
 
 .productCard:hover {
@@ -49,12 +55,19 @@
     border-color: var(--cyber-button-bg);
     box-shadow: 0 0 20px rgba(255, 0, 102, 0.4);
     transform: translateY(-5px);
+    /* Enable animation only on hover */
+    animation: neonFlicker 1.5s infinite;
 }
 
 .productCard img {
     max-width: 100%;
     border-radius: 4px;
     margin-bottom: 10px;
+    /* Optimize image rendering - reduce paint operations */
+    will-change: opacity;
+    content-visibility: auto;
+    /* Lazy load images for performance */
+    loading: lazy;
 }
 
 .productCard h3 {
@@ -172,5 +185,63 @@
 .alert.warning {
     background-color: #ff9900;
 }
+
+/*animation for neon flicker */
+@keyframes neonFlicker {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 255, 153, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+    }
+}
+@media (max-width: 600px) {
+    .productGrid {
+        grid-template-columns: 1fr;
+    }
+}   
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
+@media (max-width: 768px) {
+    .store-main {
+        padding: 10px;
+    }
+    .productCard {
+        padding: 10px;
+    }
+    .storeheading h2 {
+        font-size: 1.5em;
+    }
+}
+/* resource saving when not visible */
+@media (prefers-reduced-motion: reduce) {
+    .productCard, .button-primary, .button-secondary {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+ @media (prefers-high-contrast: high) {
+    .store-main {
+        background-color: #000;
+        color: #fff;
+    }
+    .productCard {
+        border-color: #fff;
+        background-color: #000;
+    }
+    .button-primary, .button-secondary {
+        background-color: #000;
+        color: #fff;
+        border: 2px solid #fff;
+    }
+    .input-field {
+        background-color: #000;
+        color: #fff;
+        border-color: #fff;
+    }
+}   
+}   
+
 
 /* End of cyberpunkstore.css */
