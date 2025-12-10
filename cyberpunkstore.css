@@ -1,0 +1,13 @@
+.store-main {
+    background-color: #121212;
+    color: #e0e0e0;
+    /* cyberpunky font - using web-safe alternative */
+    font-family: 'Courier New', 'Monaco', monospace;
+    padding: 20px;
+}
+store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+.
