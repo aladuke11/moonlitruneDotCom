@@ -74,6 +74,24 @@
     </footer>
     
     <script>
+        // Credit debt tracking
+        const DEBT_KEY = 'cryptoCorp_debt';
+        
+        function saveDebt(amount) {
+            const currentDebt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
+            const newDebt = currentDebt + amount;
+            localStorage.setItem(DEBT_KEY, newDebt.toFixed(2));
+            return newDebt;
+        }
+
+        function getDebt() {
+            return parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
+        }
+
+        function clearDebt() {
+            localStorage.removeItem(DEBT_KEY);
+        }
+
         // Popup functionality
         const popup = document.querySelector('.full-screen-popup');
         const closeBtn = document.querySelector('.close-popup');
@@ -96,7 +114,8 @@
         cancelBtn.addEventListener('click', closePopup);
         
         confirmBtn.addEventListener('click', function() {
-            alert('Credits borrowed successfully! Your debt has been recorded.');
+            const debt = saveDebt(500); // Add $500 debt on agreement
+            alert(`Credits borrowed successfully! Your debt has been recorded.\n\nTotal Debt: $${debt.toFixed(2)}`);
             closePopup();
         });
 
@@ -115,8 +134,13 @@
             }
         });
 
-        // Optional: Open popup on page load (comment out if not needed)
-        // window.addEventListener('load', openPopup);
+        // Check for existing debt on page load
+        window.addEventListener('load', function() {
+            const debt = getDebt();
+            if (debt > 0) {
+                console.log(`⚠️ Existing debt detected: $${debt.toFixed(2)}`);
+            }
+        });
 
         // Optional: Add keyboard support (ESC to close)
         document.addEventListener('keydown', function(e) {
