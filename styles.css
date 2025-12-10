@@ -2050,6 +2050,39 @@ body {
     transform: scale(0.98);
 }
 
+.debt-reduce-btn {
+    background: linear-gradient(135deg, var(--color-neon-mint) 0%, var(--color-neon-green) 100%);
+    border: 2px solid var(--color-neon-green);
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    white-space: nowrap;
+    box-shadow: 0 0 10px rgba(0, 255, 178, 0.4);
+    animation: hackPulse 1s infinite;
+}
+
+.debt-reduce-btn:hover {
+    background: linear-gradient(135deg, var(--color-neon-green) 0%, var(--color-neon-mint) 100%);
+    box-shadow: 0 0 20px rgba(0, 255, 178, 0.8);
+    transform: scale(1.08);
+}
+
+.debt-reduce-btn:active {
+    transform: scale(0.96);
+}
+
+@keyframes hackPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 255, 178, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(0, 255, 178, 0.7);
+    }
+}
+
 /* Adjust main content when debt bar is visible */
 body:has(#debtBar[style*="display: block"]) main {
     margin-top: 60px;

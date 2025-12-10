@@ -26,6 +26,7 @@
         <div class="debt-progress">
             <div id="debtFill" class="debt-fill"></div>
         </div>
+        <button id="debtReduceBtn" class="debt-reduce-btn" style="display: none;" title="Hack debt (Requires HoloVision Goggles)">⚡ HACK</button>
         <button id="resetBtn" class="debt-bar-reset">Reset</button>
     </div>
 
@@ -115,8 +116,10 @@
             const debtBar = document.getElementById('debtBar');
             const debtAmount = document.getElementById('debtAmount');
             const debtFill = document.getElementById('debtFill');
+            const debtReduceBtn = document.getElementById('debtReduceBtn');
             
             const debt = parseFloat(localStorage.getItem('cryptoCorp_debt')) || 0;
+            const hasGoggles = localStorage.getItem('cryptoCorp_gogglesUnlocked') === 'true';
             
             if (debt > 0) {
                 debtBar.style.display = 'flex';
@@ -125,9 +128,40 @@
                 // Calculate fill percentage (max debt 2000)
                 const fillPercent = Math.min((debt / 2000) * 100, 100);
                 debtFill.style.width = fillPercent + '%';
+                
+                // Show hack button if goggles are unlocked
+                if (hasGoggles && debtReduceBtn) {
+                    debtReduceBtn.style.display = 'inline-block';
+                } else if (debtReduceBtn) {
+                    debtReduceBtn.style.display = 'none';
+                }
             } else {
                 debtBar.style.display = 'none';
             }
+        }
+        
+        // Hack debt function (easter egg with goggles)
+        function hackDebt() {
+            const hasGoggles = localStorage.getItem('cryptoCorp_gogglesUnlocked') === 'true';
+            const currentDebt = parseFloat(localStorage.getItem('cryptoCorp_debt')) || 0;
+            
+            if (!hasGoggles) {
+                alert('You need HoloVision Goggles to perform this action!');
+                return;
+            }
+            
+            if (currentDebt <= 0) {
+                alert('No debt to hack!');
+                return;
+            }
+            
+            // Reduce debt by 10%
+            const reduction = currentDebt * 0.1;
+            const newDebt = Math.max(currentDebt - reduction, 0);
+            localStorage.setItem('cryptoCorp_debt', newDebt.toFixed(2));
+            
+            alert(`🔓 HACK SUCCESSFUL!\n\nDebt reduced by $${reduction.toFixed(2)}\nRemaining debt: $${newDebt.toFixed(2)}`);
+            updateDebtBar();
         }
         
         // Reset button handler
@@ -145,8 +179,13 @@
         window.addEventListener('load', function() {
             updateDebtBar();
             const resetBtn = document.getElementById('resetBtn');
+            const debtReduceBtn = document.getElementById('debtReduceBtn');
+            
             if (resetBtn) {
                 resetBtn.addEventListener('click', resetGame);
+            }
+            if (debtReduceBtn) {
+                debtReduceBtn.addEventListener('click', hackDebt);
             }
         });
         
