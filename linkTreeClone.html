@@ -44,8 +44,41 @@
 &lt;/html&gt;</code>
     <button class="copyButton">Copy Code</button>
     
-  </article>
+</article>
+<article class="unlock-section">
+    <h3>Secret Unlock 🔓</h3>
+    <p>Did you know? There's a special item locked in the Cyberpunk Store...</p>
+    <button id="unlockGoggles" class="unlockButton">Unlock HoloVision Goggles</button>
+    <p id="unlockStatus"></p>
+</article>
     </main>
     <script src="copyCode.js"></script>
+    <script>
+        const GOGGLES_UNLOCK_KEY = 'cryptoCorp_gogglesUnlocked';
+        const unlockBtn = document.getElementById('unlockGoggles');
+        const unlockStatus = document.getElementById('unlockStatus');
+
+        // Check if goggles are already unlocked on page load
+        window.addEventListener('load', function() {
+            const isUnlocked = localStorage.getItem(GOGGLES_UNLOCK_KEY) === 'true';
+            if (isUnlocked) {
+                unlockBtn.textContent = '✓ Goggles Unlocked';
+                unlockBtn.disabled = true;
+                unlockBtn.style.opacity = '0.6';
+                unlockStatus.textContent = 'The HoloVision Goggles are now available in the Cyberpunk Store!';
+                unlockStatus.style.color = 'var(--color-neon-green)';
+            }
+        });
+
+        // Unlock goggles when button is clicked
+        unlockBtn.addEventListener('click', function() {
+            localStorage.setItem(GOGGLES_UNLOCK_KEY, 'true');
+            unlockBtn.textContent = '✓ Goggles Unlocked';
+            unlockBtn.disabled = true;
+            unlockBtn.style.opacity = '0.6';
+            unlockStatus.textContent = 'Success! The HoloVision Goggles are now available in the Cyberpunk Store!';
+            unlockStatus.style.color = 'var(--color-neon-green)';
+        });
+    </script>
 </body>
 </html>

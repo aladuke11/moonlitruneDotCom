@@ -77,6 +77,7 @@
         // Credit debt tracking
         const DEBT_KEY = 'cryptoCorp_debt';
         const PURCHASES_KEY = 'cryptoCorp_purchases';
+        const GOGGLES_UNLOCK_KEY = 'cryptoCorp_gogglesUnlocked';
         
         function saveDebt(amount) {
             const currentDebt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
@@ -167,7 +168,7 @@
             }
         });
 
-        // Check for existing debt on page load
+        // Check for existing debt and unlock status on page load
         window.addEventListener('load', function() {
             const debt = getDebt();
             if (debt > 0) {
@@ -180,6 +181,31 @@
                 purchases.forEach((purchase, index) => {
                     console.log(`  ${index + 1}. ${purchase.name} - $${purchase.price} (${purchase.date})`);
                 });
+            }
+
+            // Check if goggles are unlocked and update UI
+            const isUnlocked = localStorage.getItem(GOGGLES_UNLOCK_KEY) === 'true';
+            if (isUnlocked) {
+                const gogglesCard = document.querySelector('.productCard.soldOut');
+                if (gogglesCard) {
+                    gogglesCard.classList.remove('soldOut');
+                    const badge = gogglesCard.querySelector('.soldOutBadge');
+                    if (badge) badge.remove();
+                    const button = gogglesCard.querySelector('.buyButton');
+                    if (button) {
+                        button.disabled = false;
+                        button.textContent = 'Buy Now';
+                        // Re-attach event listener for newly enabled button
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const productCard = button.closest('.productCard');
+                            const itemName = productCard.querySelector('.productTitle').textContent;
+                            const itemPrice = productCard.querySelector('.productPrice').textContent.replace('$', '');
+                            openPopup(itemName, itemPrice);
+                        });
+                    }
+                    console.log('🔓 HoloVision Goggles unlocked!');
+                }
             }
         });
 
