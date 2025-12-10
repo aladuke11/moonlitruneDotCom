@@ -246,6 +246,59 @@ nav a:hover {
     text-shadow: 0 0 5px var(--color-primary), 0 0 10px rgba(0, 255, 255, 0.4);
 }
 
+/* Changelog styles */
+.changelog {
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    padding: 15px;
+    background-color: rgba(26, 26, 26, 0.5);
+    box-shadow: 
+        inset 0 0 10px rgba(0, 255, 255, 0.05),
+        0 0 10px rgba(0, 255, 255, 0.1);
+}
+
+.changelog-entry {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.changelog-entry:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.changelog-entry strong {
+    color: var(--color-primary);
+    text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
+}
+
+/* Scrollbar styling for changelog */
+.changelog::-webkit-scrollbar {
+    width: 8px;
+}
+
+.changelog::-webkit-scrollbar-track {
+    background: rgba(0, 255, 255, 0.05);
+    border-radius: 5px;
+}
+
+.changelog::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+.changelog::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
 /* Footer styles */
 footer {
     background-color: var(--color-surface);
