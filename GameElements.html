@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Elements - MoonlitRune</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+    <header>
+        <div class="title-box">
+            <h1>Game Elements</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="page-intro">
+            <h2>Gamification in MoonlitRune's Website</h2>
+            <p>This website isn't just a portfolio—it's an interactive experience with hidden mechanics, progression systems, and rewards. Explore the gamey elements woven throughout the site!</p>
+        </section>
+
+        <section class="page-content">
+            <article>
+                <h3>🔓 The Unlock System</h3>
+                <p><strong>Location:</strong> LinkTree Clone page</p>
+                <p>Hidden in the LinkTree Clone project is a "Secret Unlock" button that grants you access to restricted items in the Cyberpunk Store. Click the "Unlock HoloVision Goggles" button to reveal a previously unavailable product.</p>
+                <p><strong>How it works:</strong> The unlock state is saved to your browser's localStorage, meaning once you unlock the goggles, they remain unlocked across sessions.</p>
+                <p><strong>Game Element:</strong> Discovery & Reward - Finding the unlock button feels like discovering a secret level!</p>
+            </article>
+
+            <article>
+                <h3>💳 The Debt System</h3>
+                <p><strong>Location:</strong> Cyberpunk Store</p>
+                <p>When you "purchase" items in the Cyberpunk Store, you're actually taking out a debt with the fictional CryptoCorp. Each purchase adds $500 to your outstanding debt balance.</p>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Debt persists across browser sessions</li>
+                    <li>Home page displays your current debt amount</li>
+                    <li>Number of purchased items shown on home page reminder</li>
+                    <li>Immersive cyberpunk flavor text: "Failure to pay will result in account suspension"</li>
+                </ul>
+                <p><strong>Game Element:</strong> Consequence System - Your purchases have narrative weight and consequences!</p>
+            </article>
+
+            <article>
+                <h3>📦 Purchase Tracking</h3>
+                <p><strong>Location:</strong> Cyberpunk Store & Home Page</p>
+                <p>Every item you purchase is meticulously recorded with:</p>
+                <ul>
+                    <li>Item name</li>
+                    <li>Price paid</li>
+                    <li>Exact date and time of purchase</li>
+                </ul>
+                <p>You can view your complete purchase history in the browser console (F12) using the function <code>getPurchases()</code>.</p>
+                <p><strong>Game Element:</strong> Progression Tracking - Like a quest log, your purchases are recorded for posterity!</p>
+            </article>
+
+            <article>
+                <h3>👁️ The Hidden Box</h3>
+                <p><strong>Location:</strong> Cyberpunk Store (after purchasing HoloVision Goggles)</p>
+                <p>Purchasing the exclusive HoloVision Goggles unlocks a hidden, full-screen content box with a mysterious message from an encrypted transmission.</p>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Dramatic full-screen overlay with blur effect</li>
+                    <li>Neon-styled hidden message with cyberpunk aesthetic</li>
+                    <li>Can be reopened anytime via the "👁️ Click to access hidden content" banner</li>
+                    <li>Multiple close methods: button, ESC key, or click outside</li>
+                </ul>
+                <p><strong>Game Element:</strong> Secret Reward - Purchasing a rare item grants access to exclusive hidden content!</p>
+            </article>
+
+            <article>
+                <h3>⚡ The Warning System</h3>
+                <p><strong>Location:</strong> Home Page (appears if you have debt)</p>
+                <p>If you've made purchases in the Cyberpunk Store, a prominent ⚠️ WARNING banner appears on the home page reminding you of your CryptoCorp debt status and purchase history.</p>
+                <p><strong>Game Element:</strong> Environmental Storytelling - The website itself reacts to your actions with immersive warnings!</p>
+            </article>
+
+            <article>
+                <h3>🎮 How to Experience All Game Elements</h3>
+                <p><strong>Recommended progression:</strong></p>
+                <ol>
+                    <li>Visit the <a href="linkTreeClone.html">LinkTree Clone</a> page</li>
+                    <li>Click the "Unlock HoloVision Goggles" button to unlock the secret item</li>
+                    <li>Navigate to the <a href="CyberpunkStore.html">Cyberpunk Store</a></li>
+                    <li>Notice the goggles are now available (no longer sold out!)</li>
+                    <li>Purchase the HoloVision Goggles to trigger the hidden box</li>
+                    <li>Return to the <a href="index.html">home page</a> to see your debt warning</li>
+                    <li>Check the browser console (F12) and use <code>getPurchases()</code> to view your purchase history</li>
+                </ol>
+            </article>
+
+            <article>
+                <h3>🔧 Developer Notes</h3>
+                <p><strong>localStorage Keys Used:</strong></p>
+                <ul>
+                    <li><code>cryptoCorp_debt</code> - Your total outstanding debt</li>
+                    <li><code>cryptoCorp_purchases</code> - Your complete purchase history (JSON array)</li>
+                    <li><code>cryptoCorp_gogglesUnlocked</code> - Whether goggles are unlocked (true/false)</li>
+                    <li><code>goggles_purchased</code> - Whether goggles have been purchased (true/false)</li>
+                </ul>
+                <p><strong>Console Functions Available:</strong></p>
+                <ul>
+                    <li><code>getDebt()</code> - Check your current debt</li>
+                    <li><code>getPurchases()</code> - View all purchases</li>
+                    <li><code>clearDebt()</code> - Reset debt (for testing)</li>
+                    <li><code>clearPurchases()</code> - Reset purchase history (for testing)</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>🌟 Future Game Elements (Planned)</h3>
+                <p>The gamification system is designed to be expandable. Future elements could include:</p>
+                <ul>
+                    <li>Achievement badges for milestones</li>
+                    <li>Multiple currency types</li>
+                    <li>Inventory system</li>
+                    <li>NPC interactions and story progression</li>
+                    <li>Boss encounters or challenges</li>
+                    <li>Leaderboards or competitive elements</li>
+                    <li>Seasonal events and limited-time items</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 MoonlitRune's Website</p>
+    </footer>
+</body>
+</html>

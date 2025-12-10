@@ -256,6 +256,12 @@
 .icon-game { color: var(--color-neon-pink); }
 .icon-art { color: var(--color-neon-purple); }
 .icon-learning { color: var(--color-neon-green); }
+.icon-linktree { color: var(--color-neon-mint); }
+.icon-cards { color: var(--color-neon-yellow); }
+.icon-tablet { color: var(--color-accent); }
+.icon-review { color: var(--color-neon-indigo); }
+.icon-wildwest { color: var(--color-neon-orange); }
+.icon-gameelements { color: var(--color-neon-green); }
 
 /* Hover effects for carousel icons */
 .carousel-item:hover .carousel-icon {
