@@ -76,6 +76,7 @@
     <script>
         // Credit debt tracking
         const DEBT_KEY = 'cryptoCorp_debt';
+        const PURCHASES_KEY = 'cryptoCorp_purchases';
         
         function saveDebt(amount) {
             const currentDebt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
@@ -92,6 +93,26 @@
             localStorage.removeItem(DEBT_KEY);
         }
 
+        // Purchase tracking
+        function savePurchase(itemName, price) {
+            const purchases = JSON.parse(localStorage.getItem(PURCHASES_KEY)) || [];
+            purchases.push({
+                name: itemName,
+                price: price,
+                date: new Date().toLocaleString()
+            });
+            localStorage.setItem(PURCHASES_KEY, JSON.stringify(purchases));
+            return purchases.length;
+        }
+
+        function getPurchases() {
+            return JSON.parse(localStorage.getItem(PURCHASES_KEY)) || [];
+        }
+
+        function clearPurchases() {
+            localStorage.removeItem(PURCHASES_KEY);
+        }
+
         // Popup functionality
         const popup = document.querySelector('.full-screen-popup');
         const closeBtn = document.querySelector('.close-popup');
@@ -99,13 +120,17 @@
         const cancelBtn = document.querySelector('.cancel-button');
         const buyButtons = document.querySelectorAll('.buyButton:not(:disabled)');
 
+        let currentItem = null; // Store the item being purchased
+
         // Close popup function
         function closePopup() {
             popup.classList.remove('active');
+            currentItem = null;
         }
 
         // Open popup function
-        function openPopup() {
+        function openPopup(itemName, price) {
+            currentItem = { name: itemName, price: price };
             popup.classList.add('active');
         }
 
@@ -115,7 +140,12 @@
         
         confirmBtn.addEventListener('click', function() {
             const debt = saveDebt(500); // Add $500 debt on agreement
-            alert(`Credits borrowed successfully! Your debt has been recorded.\n\nTotal Debt: $${debt.toFixed(2)}`);
+            if (currentItem) {
+                savePurchase(currentItem.name, currentItem.price);
+                alert(`Purchase recorded!\nItem: ${currentItem.name}\nPrice: $${currentItem.price}\n\nTotal Debt: $${debt.toFixed(2)}`);
+            } else {
+                alert(`Credits borrowed successfully! Your debt has been recorded.\n\nTotal Debt: $${debt.toFixed(2)}`);
+            }
             closePopup();
         });
 
@@ -123,7 +153,10 @@
         buyButtons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                openPopup();
+                const productCard = button.closest('.productCard');
+                const itemName = productCard.querySelector('.productTitle').textContent;
+                const itemPrice = productCard.querySelector('.productPrice').textContent.replace('$', '');
+                openPopup(itemName, itemPrice);
             });
         });
 
@@ -139,6 +172,14 @@
             const debt = getDebt();
             if (debt > 0) {
                 console.log(`⚠️ Existing debt detected: $${debt.toFixed(2)}`);
+            }
+            
+            const purchases = getPurchases();
+            if (purchases.length > 0) {
+                console.log(`📦 Purchase History (${purchases.length} items):`);
+                purchases.forEach((purchase, index) => {
+                    console.log(`  ${index + 1}. ${purchase.name} - $${purchase.price} (${purchase.date})`);
+                });
             }
         });
 

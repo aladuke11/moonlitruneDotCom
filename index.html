@@ -103,13 +103,32 @@
     <script>
         // Check for debt from Cyberpunk Store and show reminder
         const DEBT_KEY = 'cryptoCorp_debt';
+        const PURCHASES_KEY = 'cryptoCorp_purchases';
         const debtReminder = document.getElementById('debt-reminder');
         
         window.addEventListener('load', function() {
             const debt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
+            const purchases = JSON.parse(localStorage.getItem(PURCHASES_KEY)) || [];
+            
             if (debt > 0) {
+                let debtMessage = `<strong>⚠️ NOTICE:</strong> You have an outstanding debt of $${debt.toFixed(2)} with CryptoCorp.`;
+                
+                if (purchases.length > 0) {
+                    debtMessage += ` You have purchased ${purchases.length} item(s).`;
+                }
+                
+                debtMessage += ` Visit the <a href="CyberpunkStore.html">Cyberpunk Store</a> to check your account status.`;
+                
                 debtReminder.style.display = 'block';
-                debtReminder.innerHTML = `<strong>⚠️ NOTICE:</strong> You have an outstanding debt of $${debt.toFixed(2)} with CryptoCorp. Visit the <a href="CyberpunkStore.html">Cyberpunk Store</a> to check your account status.`;
+                debtReminder.innerHTML = debtMessage;
+            }
+            
+            // Log purchase history to console for debugging
+            if (purchases.length > 0) {
+                console.log(`📦 Purchase History (${purchases.length} items):`);
+                purchases.forEach((purchase, index) => {
+                    console.log(`  ${index + 1}. ${purchase.name} - $${purchase.price} (${purchase.date})`);
+                });
             }
         });
     </script>
