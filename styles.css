@@ -1975,5 +1975,63 @@ body {
 }
 
 /* ============================================
+   DEBT BAR STYLING
+   ============================================ */
+.debt-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 20, 0.9) 100%);
+    border-bottom: 2px solid var(--color-neon-orange);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 20px;
+    font-family: monospace;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(255, 153, 0, 0.2);
+}
+
+.debt-label {
+    color: var(--color-neon-orange);
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 0 0 8px rgba(255, 153, 0, 0.5);
+}
+
+.debt-amount {
+    color: var(--color-neon-pink);
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px rgba(255, 79, 248, 0.6);
+    min-width: 80px;
+}
+
+.debt-progress {
+    flex: 1;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-neon-orange);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.debt-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-neon-orange) 0%, var(--color-neon-pink) 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+}
+
+/* Adjust main content when debt bar is visible */
+body:has(#debtBar[style*="display: block"]) main {
+    margin-top: 60px;
+}
+
+/* ============================================
    END OF STYLESHEET
    ============================================ */
