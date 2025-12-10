@@ -47,6 +47,15 @@
     /* Performance: Use will-change and reduce animations off-screen */
     will-change: transform;
     contain: layout style paint;
+    /* Cyberpunk clip-path - slanted edges */
+    clip-path: polygon(
+        15px 0,
+        100% 0,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        0 100%,
+        0 15px
+    );
     /* Neon flicker animation only on hover/visible */
 }
 
@@ -314,6 +323,15 @@
         0 0 20px rgba(255, 0, 102, 0.4),
         inset 0 0 20px rgba(255, 0, 102, 0.1);
     animation: slideIn 0.3s ease;
+    /* Cyberpunk clip-path - angled corners */
+    clip-path: polygon(
+        20px 0,
+        100% 0,
+        100% calc(100% - 20px),
+        calc(100% - 20px) 100%,
+        0 100%,
+        0 20px
+    );
 }
 
 @keyframes slideIn {
