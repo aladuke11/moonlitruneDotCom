@@ -246,6 +246,32 @@ nav a:hover {
     text-shadow: 0 0 5px var(--color-primary), 0 0 10px rgba(0, 255, 255, 0.4);
 }
 
+/* Debt warning banner */
+.debt-warning {
+    background: linear-gradient(90deg, rgba(255, 68, 68, 0.2) 0%, rgba(255, 170, 0, 0.2) 100%);
+    border: 2px solid var(--color-neon-orange);
+    border-left: 5px solid var(--color-secondary);
+    padding: 15px 20px;
+    margin: 0;
+    color: var(--color-neon-orange);
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 170, 0, 0.4);
+    text-align: center;
+    box-shadow: 
+        0 0 10px rgba(255, 170, 0, 0.2),
+        inset 0 0 5px rgba(255, 170, 0, 0.1);
+}
+
+.debt-warning a {
+    color: var(--color-secondary);
+    text-shadow: 0 0 3px rgba(255, 68, 68, 0.4);
+}
+
+.debt-warning a:hover {
+    color: var(--color-neon-orange);
+    text-shadow: 0 0 8px rgba(255, 170, 0, 0.6);
+}
+
 /* Changelog styles */
 .changelog {
     height: 300px;

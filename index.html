@@ -18,6 +18,9 @@
             </ul>
         </nav>
     </header>
+    <div id="debt-reminder" class="debt-warning" style="display: none;">
+        <strong>⚠️ NOTICE:</strong> You have an outstanding debt with CryptoCorp. Visit the <a href="CyberpunkStore.html">Cyberpunk Store</a> to check your account status.
+    </div>
     <main>
         <section class="page-intro">
             <h2>About MoonlitRune</h2>
@@ -96,5 +99,19 @@
         <p>&copy; 2023 MoonlitRune's Place</p>
         <p>Background image from <a href="https://www.vecteezy.com">www.Vecteezy.com</a></p>
     </footer>
+
+    <script>
+        // Check for debt from Cyberpunk Store and show reminder
+        const DEBT_KEY = 'cryptoCorp_debt';
+        const debtReminder = document.getElementById('debt-reminder');
+        
+        window.addEventListener('load', function() {
+            const debt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
+            if (debt > 0) {
+                debtReminder.style.display = 'block';
+                debtReminder.innerHTML = `<strong>⚠️ NOTICE:</strong> You have an outstanding debt of $${debt.toFixed(2)} with CryptoCorp. Visit the <a href="CyberpunkStore.html">Cyberpunk Store</a> to check your account status.`;
+            }
+        });
+    </script>
 </body>
 </html>
