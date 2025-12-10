@@ -79,6 +79,7 @@
         const closeBtn = document.querySelector('.close-popup');
         const confirmBtn = document.querySelector('.confirm-button');
         const cancelBtn = document.querySelector('.cancel-button');
+        const buyButtons = document.querySelectorAll('.buyButton:not(:disabled)');
 
         // Close popup function
         function closePopup() {
@@ -90,13 +91,21 @@
             popup.classList.add('active');
         }
 
-        // Event listeners
+        // Event listeners for popup controls
         closeBtn.addEventListener('click', closePopup);
         cancelBtn.addEventListener('click', closePopup);
         
         confirmBtn.addEventListener('click', function() {
             alert('Credits borrowed successfully! Your debt has been recorded.');
             closePopup();
+        });
+
+        // Add click listeners to all buy buttons
+        buyButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                openPopup();
+            });
         });
 
         // Close popup when clicking outside of it
@@ -107,7 +116,7 @@
         });
 
         // Optional: Open popup on page load (comment out if not needed)
-        window.addEventListener('load', openPopup);
+        // window.addEventListener('load', openPopup);
 
         // Optional: Add keyboard support (ESC to close)
         document.addEventListener('keydown', function(e) {
