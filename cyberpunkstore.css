@@ -105,6 +105,33 @@
     color: var(--cyber-text);
     font-size: 1.1em;
 }
+
+.buyButton {
+    background-color: var(--cyber-button-bg);
+    color: white;
+    border: 2px solid var(--cyber-button-bg);
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    will-change: background-color, box-shadow;
+}
+
+.buyButton:hover {
+    background-color: var(--cyber-button-bg-hover);
+    border-color: var(--cyber-accent);
+    box-shadow: 0 0 15px rgba(255, 0, 102, 0.6), inset 0 0 10px rgba(0, 255, 153, 0.2);
+    transform: scale(1.05);
+}
+
+.buyButton:active {
+    transform: scale(0.98);
+}
     font-weight: bold;
     color: #00ff99;
     margin-top: 10px;
