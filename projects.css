@@ -180,6 +180,8 @@
     overflow: hidden;
     transform: translateY(0);
     animation: buttonBreathe 3s ease-in-out infinite;
+    white-space: nowrap;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .carousel-button::before {
