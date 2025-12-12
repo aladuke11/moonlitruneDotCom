@@ -26,6 +26,27 @@
     /* cyberpunky font - using web-safe alternative */
     font-family: 'Courier New', 'Monaco', monospace;
     padding: 20px;
+    border: 3px solid var(--cyber-accent);
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 153, 0.3),
+        inset 0 0 0 2px rgba(0, 255, 153, 0.2),
+        inset 0 0 0 8px var(--cyber-bg),
+        inset 0 0 0 11px rgba(0, 255, 153, 0.4);
+    position: relative;
+}
+
+.store-main::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border: 1px solid rgba(0, 255, 153, 0.15);
+    border-radius: 7px;
+    pointer-events: none;
 }
 
 .productGrid {
@@ -43,7 +64,11 @@
     padding: 15px;
     text-align: center;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 255, 153, 0.2);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 153, 0.2),
+        inset 0 0 0 1px rgba(0, 255, 153, 0.3),
+        inset 0 0 0 4px var(--cyber-secondary-bg),
+        inset 0 0 0 6px rgba(0, 255, 153, 0.5);
     /* Performance: Use will-change and reduce animations off-screen */
     will-change: transform;
     contain: layout style paint;
@@ -56,16 +81,45 @@
         0 100%,
         0 15px
     );
-    /* Neon flicker animation only on hover/visible */
+    position: relative;
+}
+
+.productCard::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    border: 1px solid rgba(0, 255, 153, 0.2);
+    border-radius: 6px;
+    pointer-events: none;
+    clip-path: polygon(
+        13px 0,
+        100% 0,
+        100% calc(100% - 13px),
+        calc(100% - 13px) 100%,
+        0 100%,
+        0 13px
+    );
 }
 
 .productCard:hover {
     background-color: var(--cyber-secondary-bg-hover);
     border-color: var(--cyber-button-bg);
-    box-shadow: 0 0 20px rgba(255, 0, 102, 0.4);
+    box-shadow: 
+        0 0 20px rgba(255, 0, 102, 0.4),
+        0 0 30px rgba(255, 0, 102, 0.2),
+        inset 0 0 0 1px rgba(255, 0, 102, 0.4),
+        inset 0 0 0 4px var(--cyber-secondary-bg-hover),
+        inset 0 0 0 6px rgba(255, 0, 102, 0.6);
     transform: translateY(-5px);
     /* Enable animation only on hover */
     animation: neonFlicker 1.5s infinite;
+}
+
+.productCard:hover::before {
+    border-color: rgba(255, 0, 102, 0.3);
 }
 
 .productCard img {
