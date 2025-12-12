@@ -2199,6 +2199,10 @@ body:has(#debtBar[style*="display: block"]) main {
     font-family: monospace;
     font-size: 0.9rem;
     letter-spacing: 1px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 200px;
 }
 
 .code-vision-toggle:hover {
