@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moonlitrune-home</title>
+    <title>Moonlit Rune Portfolio</title>
     <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
     <header>
         <div class="title-box">
-            <h1>Welcome to MoonlitRune's Place</h1>
+            <h1>Welcome to Moonlit Rune's Place</h1>
         </div>
         <nav>
             <ul>
@@ -33,7 +33,7 @@
 
     <main>
         <section class="page-intro">
-            <h2>About MoonlitRune</h2>
+            <h2>About Moonlit Rune</h2>
             <p>I am learning web development and this is my personal space to showcase my projects and interests. I am mainly using this to tinker and bodgee around with HTML, CSS, and JavaScript.
             I currently work as a cashier but I aspire to become a web developer. I enjoy tabletop gaming, especially Dungeons & Dragons, and Fate. I love reading fantasy novels and exploring new technologies. This website is a reflection of my journey in learning web development and sharing my hobbies with the world.
             I am using this website to learn and practice my skills, so expect changes and updates as I continue to grow. Feel free to reach out if you have any questions or just want to chat about web development or gaming!</p>
@@ -106,6 +106,56 @@
         </section>
     </main>
 
+    <!-- Code Vision Overlays (visible with HoloVision Goggles) -->
+    <div id="codeOverlays" class="code-overlays" style="display: none;">
+        <div class="code-snippet" data-section="header" style="top: 100px; left: 20px;">
+            <div class="code-label">HEADER.HTML</div>
+            <pre><code>&lt;header&gt;
+  &lt;div class="title-box"&gt;
+    &lt;h1&gt;Welcome&lt;/h1&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+        </div>
+        
+        <div class="code-snippet" data-section="nav" style="top: 180px; right: 30px;">
+            <div class="code-label">NAV.CSS</div>
+            <pre><code>nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}</code></pre>
+        </div>
+        
+        <div class="code-snippet" data-section="debt" style="top: 50px; right: 50px;">
+            <div class="code-label">DEBT.JS</div>
+            <pre><code>const debt = parseFloat(
+  localStorage.getItem(
+    'cryptoCorp_debt'
+  )
+) || 0;</code></pre>
+        </div>
+        
+        <div class="code-snippet" data-section="main" style="bottom: 200px; left: 50px;">
+            <div class="code-label">MAIN.HTML</div>
+            <pre><code>&lt;section class="page-intro"&gt;
+  &lt;h2&gt;About Moonlit Rune&lt;/h2&gt;
+  &lt;p&gt;Learning web dev...&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+        </div>
+        
+        <div class="code-snippet" data-section="footer" style="bottom: 50px; right: 40px;">
+            <div class="code-label">FOOTER.HTML</div>
+            <pre><code>&lt;footer&gt;
+  &lt;p&gt;&copy; 2023&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+        </div>
+    </div>
+
+    <!-- Toggle button for code vision -->
+    <button id="toggleCodeVision" class="code-vision-toggle" style="display: none;" title="Toggle Code Vision (HoloVision Goggles)">
+        👁️ CODE VISION
+    </button>
+
     <footer>
         <p>&copy; 2023 MoonlitRune's Place</p>
         <p>Background image from <a href="https://www.vecteezy.com">www.Vecteezy.com</a></p>
@@ -172,15 +222,63 @@
                 localStorage.removeItem('cryptoCorp_purchases');
                 localStorage.removeItem('cryptoCorp_gogglesUnlocked');
                 updateDebtBar();
+                checkCodeVisionAccess();
                 alert('Game reset complete!');
+            }
+        }
+        
+        // Code Vision Feature (HoloVision Goggles)
+        let codeVisionActive = false;
+        
+        function checkCodeVisionAccess() {
+            const hasGoggles = localStorage.getItem('cryptoCorp_gogglesUnlocked') === 'true';
+            const toggleBtn = document.getElementById('toggleCodeVision');
+            
+            if (hasGoggles && toggleBtn) {
+                toggleBtn.style.display = 'block';
+            } else if (toggleBtn) {
+                toggleBtn.style.display = 'none';
+                // Hide overlays if goggles are removed
+                const overlays = document.getElementById('codeOverlays');
+                if (overlays) {
+                    overlays.style.display = 'none';
+                }
+                codeVisionActive = false;
+            }
+        }
+        
+        function toggleCodeVision() {
+            const hasGoggles = localStorage.getItem('cryptoCorp_gogglesUnlocked') === 'true';
+            
+            if (!hasGoggles) {
+                alert('You need HoloVision Goggles to access Code Vision!');
+                return;
+            }
+            
+            const overlays = document.getElementById('codeOverlays');
+            const toggleBtn = document.getElementById('toggleCodeVision');
+            
+            codeVisionActive = !codeVisionActive;
+            
+            if (codeVisionActive) {
+                overlays.style.display = 'block';
+                toggleBtn.classList.add('active');
+                toggleBtn.textContent = '👁️ CODE VISION ON';
+            } else {
+                overlays.style.display = 'none';
+                toggleBtn.classList.remove('active');
+                toggleBtn.textContent = '👁️ CODE VISION';
             }
         }
         
         // Update debt bar on page load
         window.addEventListener('load', function() {
             updateDebtBar();
+            checkCodeVisionAccess();
+            
             const resetBtn = document.getElementById('resetBtn');
             const debtReduceBtn = document.getElementById('debtReduceBtn');
+            const toggleCodeBtn = document.getElementById('toggleCodeVision');
             
             if (resetBtn) {
                 resetBtn.addEventListener('click', resetGame);
@@ -188,10 +286,16 @@
             if (debtReduceBtn) {
                 debtReduceBtn.addEventListener('click', hackDebt);
             }
+            if (toggleCodeBtn) {
+                toggleCodeBtn.addEventListener('click', toggleCodeVision);
+            }
         });
         
         // Listen for storage changes (when another tab updates debt)
-        window.addEventListener('storage', updateDebtBar);
+        window.addEventListener('storage', function() {
+            updateDebtBar();
+            checkCodeVisionAccess();
+        });
     </script>
 
 </body>
