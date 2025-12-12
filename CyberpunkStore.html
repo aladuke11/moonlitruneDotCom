@@ -26,8 +26,8 @@
             <h2>Welcome to the Cyberpunk Store</h2>
             <p>Your one-stop shop for all things cyberpunk! Explore our collection of futuristic gadgets, neon apparel, and dystopian accessories.</p>
         </div>
-        <div class="current balance">
-            <h3>💰 Current Balance: <span id="creditAmount">1000</span> Credits</h3>
+        <div class="current-balance">
+            <h3>💰 Current Balance: <span id="creditAmount">$0.00</span></h3>
         </div>
         <section class="productGrid">
             <div class="productCard">
@@ -96,7 +96,7 @@
                 <h2>Credits Low</h2>
                 <p>Your account lacks credits. Would you like to borrow some more?</p>
                 <p style="font-size: 1.1em; margin: 15px 0;">
-                    <strong>Current Balance:</strong> <span id="currentBalance" style="color: var(--cyber-alert-error-bg);">$0.00</span>
+                    <strong>Current Balance:</strong> <span id="currentBalance">$0.00</span>
                 </p>
                 <p class="disclamer">Warning failure to pay will result in account suspension. Agreeing to this nulls your rights to defend yourself In the event Crypto corp hunts you down.</p>
                 <button class="confirm-button">Agree</button>
@@ -113,22 +113,62 @@
     <script>
         // Credit debt tracking
         const DEBT_KEY = 'cryptoCorp_debt';
+        const CREDITS_KEY = 'cryptoCorp_credits';
         const PURCHASES_KEY = 'cryptoCorp_purchases';
         const GOGGLES_UNLOCK_KEY = 'cryptoCorp_gogglesUnlocked';
         
-        function saveDebt(amount) {
-            const currentDebt = parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
-            const newDebt = currentDebt + amount;
-            localStorage.setItem(DEBT_KEY, newDebt.toFixed(2));
-            return newDebt;
+        function getCredits() {
+            return parseFloat(localStorage.getItem(CREDITS_KEY)) || 0;
+        }
+
+        function setCredits(amount) {
+            localStorage.setItem(CREDITS_KEY, amount.toFixed(2));
+        }
+
+        function addCredits(amount) {
+            const current = getCredits();
+            const newAmount = current + amount;
+            setCredits(newAmount);
+            return newAmount;
+        }
+
+        function deductCredits(amount) {
+            const current = getCredits();
+            const newAmount = current - amount;
+            setCredits(newAmount);
+            return newAmount;
         }
 
         function getDebt() {
             return parseFloat(localStorage.getItem(DEBT_KEY)) || 0;
         }
 
+        function addDebt(amount) {
+            const currentDebt = getDebt();
+            const newDebt = currentDebt + amount;
+            localStorage.setItem(DEBT_KEY, newDebt.toFixed(2));
+            return newDebt;
+        }
+
         function clearDebt() {
             localStorage.removeItem(DEBT_KEY);
+            localStorage.removeItem(CREDITS_KEY);
+        }
+
+        // Update balance display
+        function updateBalanceDisplay() {
+            const balanceElement = document.getElementById('creditAmount');
+            if (balanceElement) {
+                const credits = getCredits();
+                balanceElement.textContent = '$' + credits.toFixed(2);
+                if (credits <= 0) {
+                    balanceElement.style.color = 'var(--cyber-alert-error-bg)';
+                } else if (credits < 100) {
+                    balanceElement.style.color = '#ffa500'; // Orange for low credits
+                } else {
+                    balanceElement.style.color = 'var(--cyber-accent)';
+                }
+            }
         }
 
         // Purchase tracking
@@ -170,11 +210,12 @@
         function openPopup(itemName, price) {
             currentItem = { name: itemName, price: price };
             // Update balance display
-            const currentDebt = getDebt();
+            const credits = getCredits();
+            const debt = getDebt();
             const balanceDisplay = document.getElementById('currentBalance');
             if (balanceDisplay) {
-                balanceDisplay.textContent = '-$' + currentDebt.toFixed(2);
-                if (currentDebt > 0) {
+                balanceDisplay.textContent = '$' + credits.toFixed(2) + ' (Debt: $' + debt.toFixed(2) + ')';
+                if (credits <= 0) {
                     balanceDisplay.style.color = 'var(--cyber-alert-error-bg)';
                 } else {
                     balanceDisplay.style.color = 'var(--cyber-accent)';
@@ -188,10 +229,28 @@
         cancelBtn.addEventListener('click', closePopup);
         
         confirmBtn.addEventListener('click', function() {
-            const debt = saveDebt(500); // Add $500 debt on agreement
             if (currentItem) {
-                savePurchase(currentItem.name, currentItem.price);
-                alert(`Purchase recorded!\nItem: ${currentItem.name}\nPrice: $${currentItem.price}\n\nTotal Debt: $${debt.toFixed(2)}`);
+                // Check if user has enough credits
+                const credits = getCredits();
+                const price = parseFloat(currentItem.price);
+                
+                if (credits >= price) {
+                    // User has enough credits, just deduct
+                    deductCredits(price);
+                    savePurchase(currentItem.name, currentItem.price);
+                    const newCredits = getCredits();
+                    alert(`Purchase successful!\nItem: ${currentItem.name}\nPrice: $${price.toFixed(2)}\n\nRemaining Credits: $${newCredits.toFixed(2)}`);
+                } else {
+                    // User needs to borrow more
+                    const borrowed = 500;
+                    addCredits(borrowed);
+                    addDebt(borrowed);
+                    deductCredits(price);
+                    savePurchase(currentItem.name, currentItem.price);
+                    const newCredits = getCredits();
+                    const totalDebt = getDebt();
+                    alert(`Credits borrowed and purchase completed!\nBorrowed: $${borrowed.toFixed(2)}\nItem: ${currentItem.name}\nPrice: $${price.toFixed(2)}\n\nRemaining Credits: $${newCredits.toFixed(2)}\nTotal Debt: $${totalDebt.toFixed(2)}`);
+                }
                 
                 // Check if goggles were just purchased
                 if (currentItem.name.includes('HoloVision Goggles')) {
@@ -200,8 +259,15 @@
                     }, 500);
                 }
             } else {
-                alert(`Credits borrowed successfully! Your debt has been recorded.\n\nTotal Debt: $${debt.toFixed(2)}`);
+                // Just borrowing credits
+                const borrowed = 500;
+                addCredits(borrowed);
+                addDebt(borrowed);
+                const newCredits = getCredits();
+                const totalDebt = getDebt();
+                alert(`Credits borrowed successfully!\nAmount: $${borrowed.toFixed(2)}\n\nAvailable Credits: $${newCredits.toFixed(2)}\nTotal Debt: $${totalDebt.toFixed(2)}`);
             }
+            updateBalanceDisplay();
             closePopup();
         });
 
@@ -211,8 +277,28 @@
                 e.preventDefault();
                 const productCard = button.closest('.productCard');
                 const itemName = productCard.querySelector('.productTitle').textContent;
-                const itemPrice = productCard.querySelector('.productPrice').textContent.replace('$', '');
-                openPopup(itemName, itemPrice);
+                const itemPrice = parseFloat(productCard.querySelector('.productPrice').textContent.replace('$', ''));
+                const credits = getCredits();
+                
+                // Only show popup if credits are insufficient
+                if (credits < itemPrice) {
+                    openPopup(itemName, itemPrice);
+                } else {
+                    // Purchase directly
+                    deductCredits(itemPrice);
+                    savePurchase(itemName, itemPrice);
+                    const newCredits = getCredits();
+                    alert(`Purchase successful!\nItem: ${itemName}\nPrice: $${itemPrice.toFixed(2)}\n\nRemaining Credits: $${newCredits.toFixed(2)}`);
+                    
+                    // Check if goggles were just purchased
+                    if (itemName.includes('HoloVision Goggles')) {
+                        setTimeout(() => {
+                            showHiddenBox();
+                        }, 500);
+                    }
+                    
+                    updateBalanceDisplay();
+                }
             });
         });
 
@@ -323,6 +409,9 @@
                 closePopup();
             }
         });
+
+        // Update balance display on page load
+        updateBalanceDisplay();
     </script>
 </body>
 </html>
