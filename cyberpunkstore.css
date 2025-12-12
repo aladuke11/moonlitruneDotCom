@@ -51,10 +51,32 @@
 
 .productGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
     /* Performance optimization */
     contain: layout;
+}
+
+/* Adjust grid for different product counts */
+@supports (display: grid) {
+    .productGrid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* Ensure products don't stretch too wide when there are few items */
+@media (min-width: 768px) {
+    .productGrid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    .productGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .productCard {
