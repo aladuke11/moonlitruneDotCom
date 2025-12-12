@@ -2103,7 +2103,7 @@ body:has(#debtBar[style*="display: block"]) main {
 }
 
 .code-snippet {
-    position: absolute;
+    position: fixed;
     background: rgba(0, 20, 40, 0.95);
     border: 2px solid var(--color-neon-cyan);
     border-radius: 5px;
@@ -2121,6 +2121,7 @@ body:has(#debtBar[style*="display: block"]) main {
     cursor: grab;
     user-select: none;
     transition: box-shadow 0.2s ease;
+    z-index: 1000;
 }
 
 .code-snippet:active {

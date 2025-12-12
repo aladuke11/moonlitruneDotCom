@@ -278,67 +278,53 @@
             
             snippets.forEach(snippet => {
                 let isDragging = false;
-                let currentX;
-                let currentY;
-                let initialX;
-                let initialY;
-                let xOffset = 0;
-                let yOffset = 0;
+                let startX, startY;
+                let startLeft, startTop;
                 
                 snippet.addEventListener('mousedown', dragStart);
-                document.addEventListener('mousemove', drag);
-                document.addEventListener('mouseup', dragEnd);
-                
-                // Touch events for mobile
-                snippet.addEventListener('touchstart', dragStart);
-                document.addEventListener('touchmove', drag);
-                document.addEventListener('touchend', dragEnd);
                 
                 function dragStart(e) {
-                    if (e.type === 'touchstart') {
-                        initialX = e.touches[0].clientX - xOffset;
-                        initialY = e.touches[0].clientY - yOffset;
-                    } else {
-                        initialX = e.clientX - xOffset;
-                        initialY = e.clientY - yOffset;
-                    }
+                    isDragging = true;
+                    snippet.style.cursor = 'grabbing';
+                    snippet.style.animation = 'codeGlitch 3s infinite';
                     
-                    if (e.target.closest('.code-snippet') === snippet) {
-                        isDragging = true;
-                        snippet.style.cursor = 'grabbing';
-                    }
+                    // Get current position
+                    const rect = snippet.getBoundingClientRect();
+                    startLeft = rect.left;
+                    startTop = rect.top;
+                    
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    
+                    document.addEventListener('mousemove', dragMove);
+                    document.addEventListener('mouseup', dragEnd);
+                    
+                    e.preventDefault();
                 }
                 
-                function drag(e) {
-                    if (isDragging) {
-                        e.preventDefault();
-                        
-                        if (e.type === 'touchmove') {
-                            currentX = e.touches[0].clientX - initialX;
-                            currentY = e.touches[0].clientY - initialY;
-                        } else {
-                            currentX = e.clientX - initialX;
-                            currentY = e.clientY - initialY;
-                        }
-                        
-                        xOffset = currentX;
-                        yOffset = currentY;
-                        
-                        setTranslate(currentX, currentY, snippet);
-                    }
+                function dragMove(e) {
+                    if (!isDragging) return;
+                    
+                    const deltaX = e.clientX - startX;
+                    const deltaY = e.clientY - startY;
+                    
+                    snippet.style.left = (startLeft + deltaX) + 'px';
+                    snippet.style.top = (startTop + deltaY) + 'px';
+                    snippet.style.right = 'auto';
+                    snippet.style.bottom = 'auto';
+                    
+                    e.preventDefault();
                 }
                 
                 function dragEnd() {
-                    if (isDragging) {
-                        initialX = currentX;
-                        initialY = currentY;
-                        isDragging = false;
-                        snippet.style.cursor = 'grab';
-                    }
-                }
-                
-                function setTranslate(xPos, yPos, el) {
-                    el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+                    if (!isDragging) return;
+                    
+                    isDragging = false;
+                    snippet.style.cursor = 'grab';
+                    snippet.style.animation = 'codeGlitch 3s infinite, float 4s ease-in-out infinite';
+                    
+                    document.removeEventListener('mousemove', dragMove);
+                    document.removeEventListener('mouseup', dragEnd);
                 }
                 
                 // Set initial cursor
