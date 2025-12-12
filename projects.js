@@ -43,3 +43,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the carousel
     showItem(current);
 });
+
+// Changelog toggle functionality
+function toggleChangelog() {
+    const content = document.getElementById('changelogContent');
+    const toggle = document.getElementById('changelogToggle');
+    
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
