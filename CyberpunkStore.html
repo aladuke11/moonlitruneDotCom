@@ -26,6 +26,9 @@
             <h2>Welcome to the Cyberpunk Store</h2>
             <p>Your one-stop shop for all things cyberpunk! Explore our collection of futuristic gadgets, neon apparel, and dystopian accessories.</p>
         </div>
+        <div class="current balance">
+            <h3>💰 Current Balance: <span id="creditAmount">1000</span> Credits</h3>
+        </div>
         <section class="productGrid">
             <div class="productCard">
                 <img class="productImage" src="images/8adfe9eb-0b2c-433d-9c08-f97a0f494f1a.png" alt="Cyberpunk Jacket">
@@ -56,6 +59,20 @@
                     <span class="productPrice">$129.99</span>
                     <button class="buyButton">Buy Now</button>
                 </div>
+                <div class="productCard">
+                    <img class="productImage" src="images/8adfe9eb-0b2c-433d-9c08-f97a0f494f1a.png" alt="Cyberpunk Boots">
+                    <h3 class="productTitle">NeonStride Boots</h3>
+                    <p class="productDescription">Light up the night with NeonStride Boots, featuring customizable LED soles and ergonomic design for ultimate comfort.</p>
+                    <span class="productPrice">$159.99</span>
+                    <button class="buyButton">Buy Now</button>
+                </div>
+                <div class="productCard">
+                    <img class="productImage" src="images/8adfe9eb-0b2c-433d-9c08-f97a0f494f1a.png" alt="Cyberpunk Headphones">
+                    <h3 class="productTitle">SynthWave Headphones</h3>
+                    <p class="productDescription">Immerse yourself in sound with SynthWave Headphones, delivering crystal-clear audio and noise-cancellation technology.</p>
+                    <span class="productPrice">$99.99</span>
+                    <button class="buyButton">Buy Now</button>
+                </div>
         
         </section>
         <div id="hiddenBox" class="hidden-box" style="display: none;">
@@ -78,6 +95,9 @@
                 <span class="close-popup">&times;</span>
                 <h2>Credits Low</h2>
                 <p>Your account lacks credits. Would you like to borrow some more?</p>
+                <p style="font-size: 1.1em; margin: 15px 0;">
+                    <strong>Current Balance:</strong> <span id="currentBalance" style="color: var(--cyber-alert-error-bg);">$0.00</span>
+                </p>
                 <p class="disclamer">Warning failure to pay will result in account suspension. Agreeing to this nulls your rights to defend yourself In the event Crypto corp hunts you down.</p>
                 <button class="confirm-button">Agree</button>
                 <button class="cancel-button">Cancel</button>
@@ -149,6 +169,17 @@
         // Open popup function
         function openPopup(itemName, price) {
             currentItem = { name: itemName, price: price };
+            // Update balance display
+            const currentDebt = getDebt();
+            const balanceDisplay = document.getElementById('currentBalance');
+            if (balanceDisplay) {
+                balanceDisplay.textContent = '-$' + currentDebt.toFixed(2);
+                if (currentDebt > 0) {
+                    balanceDisplay.style.color = 'var(--cyber-alert-error-bg)';
+                } else {
+                    balanceDisplay.style.color = 'var(--cyber-accent)';
+                }
+            }
             popup.classList.add('active');
         }
 
