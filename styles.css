@@ -2117,6 +2117,18 @@ body:has(#debtBar[style*="display: block"]) main {
     animation: codeGlitch 3s infinite, float 4s ease-in-out infinite;
     max-width: 300px;
     backdrop-filter: blur(2px);
+    pointer-events: auto;
+    cursor: grab;
+    user-select: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.code-snippet:active {
+    cursor: grabbing;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 247, 0.6),
+        inset 0 0 15px rgba(0, 255, 247, 0.2);
+    animation: codeGlitch 3s infinite;
 }
 
 .code-snippet pre {
